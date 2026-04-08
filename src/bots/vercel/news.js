@@ -15,8 +15,8 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-/** @type {string} Vercel Blog RSS feed URL */
-const VERCEL_RSS_URL = "https://vercel.com/blog/rss.xml";
+/** @type {string} Vercel Blog Atom feed URL */
+const VERCEL_RSS_URL = "https://vercel.com/atom";
 
 /** @type {import('../../api/client.js').TdnClient} API client for the Vercel bot */
 const client = createTdnClient("vercel");
