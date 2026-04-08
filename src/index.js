@@ -55,46 +55,328 @@ import { startSvelteUpdatesBot } from "./bots/svelte/update.js";
 import { startTailwindNewsBot } from "./bots/tailwindcss/news.js";
 import { startTailwindUpdatesBot } from "./bots/tailwindcss/update.js";
 
+/* ── Java ───────────────────────────────────────────────── */
+import { startJavaNewsBot } from "./bots/java/news.js";
+import { startJavaUpdatesBot } from "./bots/java/update.js";
+
+/* ── Kotlin ─────────────────────────────────────────────── */
+import { startKotlinNewsBot } from "./bots/kotlin/news.js";
+import { startKotlinUpdatesBot } from "./bots/kotlin/update.js";
+
+/* ── Swift ──────────────────────────────────────────────── */
+import { startSwiftNewsBot } from "./bots/swift/news.js";
+import { startSwiftUpdatesBot } from "./bots/swift/update.js";
+
+/* ── PHP ────────────────────────────────────────────────── */
+import { startPHPNewsBot } from "./bots/php/news.js";
+import { startPHPUpdatesBot } from "./bots/php/update.js";
+
+/* ── Ruby ───────────────────────────────────────────────── */
+import { startRubyNewsBot } from "./bots/ruby/news.js";
+import { startRubyUpdatesBot } from "./bots/ruby/update.js";
+
+/* ── .NET ───────────────────────────────────────────────── */
+import { startDotNetNewsBot } from "./bots/dotnet/news.js";
+import { startDotNetUpdatesBot } from "./bots/dotnet/update.js";
+
+/* ── Elixir ─────────────────────────────────────────────── */
+import { startElixirNewsBot } from "./bots/elixir/news.js";
+import { startElixirUpdatesBot } from "./bots/elixir/update.js";
+
+/* ── Zig (update only) ─────────────────────────────────── */
+import { startZigUpdatesBot } from "./bots/zig/update.js";
+
+/* ── Nuxt ───────────────────────────────────────────────── */
+import { startNuxtNewsBot } from "./bots/nuxt/news.js";
+import { startNuxtUpdatesBot } from "./bots/nuxt/update.js";
+
+/* ── Astro ──────────────────────────────────────────────── */
+import { startAstroNewsBot } from "./bots/astro/news.js";
+import { startAstroUpdatesBot } from "./bots/astro/update.js";
+
+/* ── Laravel ────────────────────────────────────────────── */
+import { startLaravelNewsBot } from "./bots/laravel/news.js";
+import { startLaravelUpdatesBot } from "./bots/laravel/update.js";
+
+/* ── Remix (update only) ───────────────────────────────── */
+import { startRemixUpdatesBot } from "./bots/remix/update.js";
+
+/* ── Express (update only) ─────────────────────────────── */
+import { startExpressUpdatesBot } from "./bots/express/update.js";
+
+/* ── Fastify (update only) ─────────────────────────────── */
+import { startFastifyUpdatesBot } from "./bots/fastify/update.js";
+
+/* ── NestJS (update only) ──────────────────────────────── */
+import { startNestJSUpdatesBot } from "./bots/nestjs/update.js";
+
+/* ── Hono (update only) ────────────────────────────────── */
+import { startHonoUpdatesBot } from "./bots/hono/update.js";
+
+/* ── Django (update only) ──────────────────────────────── */
+import { startDjangoUpdatesBot } from "./bots/django/update.js";
+
+/* ── FastAPI (update only) ─────────────────────────────── */
+import { startFastAPIUpdatesBot } from "./bots/fastapi/update.js";
+
+/* ── Spring Boot (update only) ─────────────────────────── */
+import { startSpringBootUpdatesBot } from "./bots/springboot/update.js";
+
+/* ── Rails (update only) ───────────────────────────────── */
+import { startRailsUpdatesBot } from "./bots/rails/update.js";
+
+/* ── Vite (update only) ────────────────────────────────── */
+import { startViteUpdatesBot } from "./bots/vite/update.js";
+
+/* ── esbuild (update only) ─────────────────────────────── */
+import { startEsbuildUpdatesBot } from "./bots/esbuild/update.js";
+
+/* ── SWC (update only) ─────────────────────────────────── */
+import { startSWCUpdatesBot } from "./bots/swc/update.js";
+
+/* ── Biome (update only) ───────────────────────────────── */
+import { startBiomeUpdatesBot } from "./bots/biome/update.js";
+
+/* ── ESLint (update only) ──────────────────────────────── */
+import { startESLintUpdatesBot } from "./bots/eslint/update.js";
+
+/* ── Prettier (update only) ────────────────────────────── */
+import { startPrettierUpdatesBot } from "./bots/prettier/update.js";
+
+/* ── pnpm (update only) ────────────────────────────────── */
+import { startPnpmUpdatesBot } from "./bots/pnpm/update.js";
+
+/* ── Vitest (update only) ──────────────────────────────── */
+import { startVitestUpdatesBot } from "./bots/vitest/update.js";
+
+/* ── Playwright (update only) ──────────────────────────── */
+import { startPlaywrightUpdatesBot } from "./bots/playwright/update.js";
+
+/* ── Webpack (update only) ─────────────────────────────── */
+import { startWebpackUpdatesBot } from "./bots/webpack/update.js";
+
+/* ── Docker ─────────────────────────────────────────────── */
+import { startDockerNewsBot } from "./bots/docker/news.js";
+import { startDockerUpdatesBot } from "./bots/docker/update.js";
+
+/* ── Kubernetes ─────────────────────────────────────────── */
+import { startKubernetesNewsBot } from "./bots/kubernetes/news.js";
+import { startKubernetesUpdatesBot } from "./bots/kubernetes/update.js";
+
+/* ── Supabase ───────────────────────────────────────────── */
+import { startSupabaseNewsBot } from "./bots/supabase/news.js";
+import { startSupabaseUpdatesBot } from "./bots/supabase/update.js";
+
+/* ── Terraform (update only) ───────────────────────────── */
+import { startTerraformUpdatesBot } from "./bots/terraform/update.js";
+
+/* ── Grafana (update only) ─────────────────────────────── */
+import { startGrafanaUpdatesBot } from "./bots/grafana/update.js";
+
+/* ── Prometheus (update only) ──────────────────────────── */
+import { startPrometheusUpdatesBot } from "./bots/prometheus/update.js";
+
+/* ── Redis (update only) ───────────────────────────────── */
+import { startRedisUpdatesBot } from "./bots/redis/update.js";
+
+/* ── Prisma (update only) ──────────────────────────────── */
+import { startPrismaUpdatesBot } from "./bots/prisma/update.js";
+
+/* ── Drizzle (update only) ─────────────────────────────── */
+import { startDrizzleUpdatesBot } from "./bots/drizzle/update.js";
+
+/* ── MongoDB (update only) ─────────────────────────────── */
+import { startMongoDBUpdatesBot } from "./bots/mongodb/update.js";
+
+/* ── Flutter ────────────────────────────────────────────── */
+import { startFlutterNewsBot } from "./bots/flutter/news.js";
+import { startFlutterUpdatesBot } from "./bots/flutter/update.js";
+
+/* ── React Native (update only) ────────────────────────── */
+import { startReactNativeUpdatesBot } from "./bots/reactnative/update.js";
+
+/* ── Electron (update only) ────────────────────────────── */
+import { startElectronUpdatesBot } from "./bots/electron/update.js";
+
+/* ── Tauri (update only) ───────────────────────────────── */
+import { startTauriUpdatesBot } from "./bots/tauri/update.js";
+
+/* ── PyTorch (update only) ─────────────────────────────── */
+import { startPyTorchUpdatesBot } from "./bots/pytorch/update.js";
+
+/* ── TensorFlow (update only) ──────────────────────────── */
+import { startTensorFlowUpdatesBot } from "./bots/tensorflow/update.js";
+
+/* ── Ollama (update only) ──────────────────────────────── */
+import { startOllamaUpdatesBot } from "./bots/ollama/update.js";
+
+/* ── LangChain (update only) ───────────────────────────── */
+import { startLangChainUpdatesBot } from "./bots/langchain/update.js";
+
+/* ── GitHub (news only) ────────────────────────────────── */
+import { startGitHubNewsBot } from "./bots/github/news.js";
+
+/* ── Cloudflare (news only) ────────────────────────────── */
+import { startCloudflareNewsBot } from "./bots/cloudflare/news.js";
+
+/* ── Vercel (news only) ────────────────────────────────── */
+import { startVercelNewsBot } from "./bots/vercel/news.js";
+
+/* ── AWS (news only) ───────────────────────────────────── */
+import { startAWSNewsBot } from "./bots/aws/news.js";
+
+/* ── Google (news only) ────────────────────────────────── */
+import { startGoogleNewsBot } from "./bots/google/news.js";
+
+/* ── OpenAI (news only) ────────────────────────────────── */
+import { startOpenAINewsBot } from "./bots/openai/news.js";
+
+/* ── Meta (news only) ──────────────────────────────────── */
+import { startMetaNewsBot } from "./bots/meta/news.js";
+
+/* ── Netflix (news only) ───────────────────────────────── */
+import { startNetflixNewsBot } from "./bots/netflix/news.js";
+
+/* ── SolidJS (update only) ─────────────────────────────── */
+import { startSolidJSUpdatesBot } from "./bots/solidjs/update.js";
+
+/* ── htmx (update only) ────────────────────────────────── */
+import { startHtmxUpdatesBot } from "./bots/htmx/update.js";
+
+/* ── Alpine.js (update only) ───────────────────────────── */
+import { startAlpineJSUpdatesBot } from "./bots/alpinejs/update.js";
+
+/* ── tRPC (update only) ────────────────────────────────── */
+import { startTRPCUpdatesBot } from "./bots/trpc/update.js";
+
+/* ── Bootstrap (update only) ───────────────────────────── */
+import { startBootstrapUpdatesBot } from "./bots/bootstrap/update.js";
+
+/* ── Three.js (update only) ────────────────────────────── */
+import { startThreeJSUpdatesBot } from "./bots/threejs/update.js";
+
 /**
  * Bot registry. Each entry contains a display name and its start function.
  * @type {{ name: string, start: Function }[]}
  */
 const bots = [
-    /* TypeScript */
+    /* ── Existing: Languages ─────────────────────────────── */
     { name: "TypeScript News", start: startTypeScriptNewsBot },
     { name: "TypeScript Updates", start: startTypeScriptUpdatesBot },
-    /* React */
-    { name: "React Updates", start: startReactUpdatesBot },
-    /* Next.js */
-    { name: "Next.js Updates", start: startNextJSUpdatesBot },
-    /* Vue.js */
-    { name: "Vue.js News", start: startVueNewsBot },
-    { name: "Vue.js Updates", start: startVueUpdatesBot },
-    /* Angular */
-    { name: "Angular News", start: startAngularNewsBot },
-    { name: "Angular Updates", start: startAngularUpdatesBot },
-    /* Node.js */
-    { name: "Node.js News", start: startNodeJSNewsBot },
-    { name: "Node.js Updates", start: startNodeJSUpdatesBot },
-    /* Python */
     { name: "Python News", start: startPythonNewsBot },
     { name: "Python Updates", start: startPythonUpdatesBot },
-    /* Rust */
     { name: "Rust News", start: startRustNewsBot },
     { name: "Rust Updates", start: startRustUpdatesBot },
-    /* Go */
     { name: "Go News", start: startGoNewsBot },
     { name: "Go Updates", start: startGoUpdatesBot },
-    /* Deno */
+
+    /* ── New: Languages ──────────────────────────────────── */
+    { name: "Java News", start: startJavaNewsBot },
+    { name: "Java Updates", start: startJavaUpdatesBot },
+    { name: "Kotlin News", start: startKotlinNewsBot },
+    { name: "Kotlin Updates", start: startKotlinUpdatesBot },
+    { name: "Swift News", start: startSwiftNewsBot },
+    { name: "Swift Updates", start: startSwiftUpdatesBot },
+    { name: "PHP News", start: startPHPNewsBot },
+    { name: "PHP Updates", start: startPHPUpdatesBot },
+    { name: "Ruby News", start: startRubyNewsBot },
+    { name: "Ruby Updates", start: startRubyUpdatesBot },
+    { name: ".NET News", start: startDotNetNewsBot },
+    { name: ".NET Updates", start: startDotNetUpdatesBot },
+    { name: "Elixir News", start: startElixirNewsBot },
+    { name: "Elixir Updates", start: startElixirUpdatesBot },
+    { name: "Zig Updates", start: startZigUpdatesBot },
+
+    /* ── Existing: Runtimes ──────────────────────────────── */
+    { name: "Node.js News", start: startNodeJSNewsBot },
+    { name: "Node.js Updates", start: startNodeJSUpdatesBot },
     { name: "Deno Updates", start: startDenoUpdatesBot },
-    /* Bun */
     { name: "Bun Updates", start: startBunUpdatesBot },
-    /* Svelte */
+
+    /* ── Existing: Frontend Frameworks ───────────────────── */
+    { name: "React Updates", start: startReactUpdatesBot },
+    { name: "Next.js Updates", start: startNextJSUpdatesBot },
+    { name: "Vue.js News", start: startVueNewsBot },
+    { name: "Vue.js Updates", start: startVueUpdatesBot },
+    { name: "Angular News", start: startAngularNewsBot },
+    { name: "Angular Updates", start: startAngularUpdatesBot },
     { name: "Svelte News", start: startSvelteNewsBot },
     { name: "Svelte Updates", start: startSvelteUpdatesBot },
-    /* Tailwind CSS */
     { name: "Tailwind CSS News", start: startTailwindNewsBot },
     { name: "Tailwind CSS Updates", start: startTailwindUpdatesBot },
+
+    /* ── New: Frameworks ─────────────────────────────────── */
+    { name: "Nuxt News", start: startNuxtNewsBot },
+    { name: "Nuxt Updates", start: startNuxtUpdatesBot },
+    { name: "Astro News", start: startAstroNewsBot },
+    { name: "Astro Updates", start: startAstroUpdatesBot },
+    { name: "Laravel News", start: startLaravelNewsBot },
+    { name: "Laravel Updates", start: startLaravelUpdatesBot },
+    { name: "Remix Updates", start: startRemixUpdatesBot },
+    { name: "Express Updates", start: startExpressUpdatesBot },
+    { name: "Fastify Updates", start: startFastifyUpdatesBot },
+    { name: "NestJS Updates", start: startNestJSUpdatesBot },
+    { name: "Hono Updates", start: startHonoUpdatesBot },
+    { name: "Django Updates", start: startDjangoUpdatesBot },
+    { name: "FastAPI Updates", start: startFastAPIUpdatesBot },
+    { name: "Spring Boot Updates", start: startSpringBootUpdatesBot },
+    { name: "Rails Updates", start: startRailsUpdatesBot },
+
+    /* ── New: Build Tools & DX ───────────────────────────── */
+    { name: "Vite Updates", start: startViteUpdatesBot },
+    { name: "esbuild Updates", start: startEsbuildUpdatesBot },
+    { name: "SWC Updates", start: startSWCUpdatesBot },
+    { name: "Biome Updates", start: startBiomeUpdatesBot },
+    { name: "ESLint Updates", start: startESLintUpdatesBot },
+    { name: "Prettier Updates", start: startPrettierUpdatesBot },
+    { name: "pnpm Updates", start: startPnpmUpdatesBot },
+    { name: "Vitest Updates", start: startVitestUpdatesBot },
+    { name: "Playwright Updates", start: startPlaywrightUpdatesBot },
+    { name: "Webpack Updates", start: startWebpackUpdatesBot },
+
+    /* ── New: Infrastructure ─────────────────────────────── */
+    { name: "Docker News", start: startDockerNewsBot },
+    { name: "Docker Updates", start: startDockerUpdatesBot },
+    { name: "Kubernetes News", start: startKubernetesNewsBot },
+    { name: "Kubernetes Updates", start: startKubernetesUpdatesBot },
+    { name: "Supabase News", start: startSupabaseNewsBot },
+    { name: "Supabase Updates", start: startSupabaseUpdatesBot },
+    { name: "Terraform Updates", start: startTerraformUpdatesBot },
+    { name: "Grafana Updates", start: startGrafanaUpdatesBot },
+    { name: "Prometheus Updates", start: startPrometheusUpdatesBot },
+    { name: "Redis Updates", start: startRedisUpdatesBot },
+    { name: "Prisma Updates", start: startPrismaUpdatesBot },
+    { name: "Drizzle Updates", start: startDrizzleUpdatesBot },
+    { name: "MongoDB Updates", start: startMongoDBUpdatesBot },
+
+    /* ── New: Mobile / Desktop / AI ──────────────────────── */
+    { name: "Flutter News", start: startFlutterNewsBot },
+    { name: "Flutter Updates", start: startFlutterUpdatesBot },
+    { name: "React Native Updates", start: startReactNativeUpdatesBot },
+    { name: "Electron Updates", start: startElectronUpdatesBot },
+    { name: "Tauri Updates", start: startTauriUpdatesBot },
+    { name: "PyTorch Updates", start: startPyTorchUpdatesBot },
+    { name: "TensorFlow Updates", start: startTensorFlowUpdatesBot },
+    { name: "Ollama Updates", start: startOllamaUpdatesBot },
+    { name: "LangChain Updates", start: startLangChainUpdatesBot },
+
+    /* ── New: Tech Company News ──────────────────────────── */
+    { name: "GitHub News", start: startGitHubNewsBot },
+    { name: "Cloudflare News", start: startCloudflareNewsBot },
+    { name: "Vercel News", start: startVercelNewsBot },
+    { name: "AWS News", start: startAWSNewsBot },
+    { name: "Google News", start: startGoogleNewsBot },
+    { name: "OpenAI News", start: startOpenAINewsBot },
+    { name: "Meta News", start: startMetaNewsBot },
+    { name: "Netflix News", start: startNetflixNewsBot },
+
+    /* ── New: Niche / Trending ───────────────────────────── */
+    { name: "SolidJS Updates", start: startSolidJSUpdatesBot },
+    { name: "htmx Updates", start: startHtmxUpdatesBot },
+    { name: "Alpine.js Updates", start: startAlpineJSUpdatesBot },
+    { name: "tRPC Updates", start: startTRPCUpdatesBot },
+    { name: "Bootstrap Updates", start: startBootstrapUpdatesBot },
+    { name: "Three.js Updates", start: startThreeJSUpdatesBot },
 ];
 
 /**
@@ -131,7 +413,7 @@ async function bootstrap() {
     log(
         "SYSTEM",
         "INFO",
-        "Monitoring news feeds and GitHub releases across 13 technologies...",
+        "Monitoring news feeds and GitHub releases across 75 technologies...",
     );
 }
 
