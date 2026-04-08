@@ -1,7 +1,7 @@
 /**
- * @module bots/netflix/news
- * @description Netflix Tech Blog news bot.
- * Monitors the Netflix Tech Blog RSS feed and publishes
+ * @module bots/unrealengine/news
+ * @description Unreal Engine news bot.
+ * Monitors the Unreal Engine blog RSS feed and publishes
  * a post to the TDN platform when a new article is detected.
  */
 
@@ -15,16 +15,16 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-/** @type {string} Netflix Tech Blog RSS feed URL */
-const NETFLIX_RSS_URL = "https://medium.com/feed/netflix-techblog";
+/** @type {string} Unreal Engine blog RSS feed URL */
+const UNREAL_RSS_URL = "https://www.unrealengine.com/en-US/rss";
 
-/** @type {import('../../api/client.js').TdnClient} API client for the Netflix bot */
-const client = createTdnClient("netflix");
+/** @type {import('../../api/client.js').TdnClient} API client for the Unreal Engine bot */
+const client = createTdnClient("unrealengine");
 
-/** @type {BaseNewsWatcher} Netflix Tech news watcher (30-minute interval) */
+/** @type {BaseNewsWatcher} Unreal Engine news watcher (30-minute interval) */
 const watcher = new BaseNewsWatcher({
-    name: "Netflix-News",
-    rssUrl: NETFLIX_RSS_URL,
+    name: "UnrealEngine-News",
+    rssUrl: UNREAL_RSS_URL,
     stateDir: __dirname,
     intervalMinutes: 30,
 });
@@ -32,15 +32,23 @@ const watcher = new BaseNewsWatcher({
 /**
  * Handles new article events by building and publishing a post to TDN.
  * @param {object} news - RSS article data
+ * @param {string} news.title - Article title
+ * @param {string} news.link - Article URL
+ * @param {string} news.description - Article description
+ * @param {string} [news.thumbnail] - Article image
  */
 watcher.on("new_article", async (news) => {
-    log("Netflix-News-Bot", "INFO", `Preparing payload for: ${news.title}`);
+    log(
+        "UnrealEngine-News-Bot",
+        "INFO",
+        `Preparing payload for: ${news.title}`,
+    );
 
     const payload = buildNewsPost({
         title: news.title,
         description: news.description,
         link: news.link,
-        tag: "#netflix",
+        tag: "#unrealengine",
         thumbnail: news.thumbnail,
     });
 
@@ -48,9 +56,9 @@ watcher.on("new_article", async (news) => {
 });
 
 /**
- * Starts the Netflix Tech news bot.
+ * Starts the Unreal Engine news bot.
  * Polls the RSS feed every 30 minutes.
  */
-export function startNetflixNewsBot() {
+export function startUnrealEngineNewsBot() {
     watcher.start();
 }

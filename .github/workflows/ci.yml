@@ -1,0 +1,70 @@
+name: CI
+
+on:
+    push:
+        branches: [main, dev]
+    pull_request:
+        branches: [main]
+
+jobs:
+    lint:
+        name: Format check
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup pnpm
+              uses: pnpm/action-setup@v4
+              with:
+                  version: 10
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: pnpm
+
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+
+            - name: Check formatting (Prettier)
+              run: pnpm exec prettier --check .
+
+    validate:
+        name: Module validation
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup pnpm
+              uses: pnpm/action-setup@v4
+              with:
+                  version: 10
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: pnpm
+
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+
+            - name: Syntax check all JS files
+              run: |
+                  find src scripts -name "*.js" | xargs -I{} node --check {}
+
+            - name: Validate core module imports
+              run: |
+                  echo '{"apiBaseUrl":"http://localhost:8080/api/v1","bots":{}}' > config.json
+                  node --input-type=module --eval "
+                    await import('./src/core/BaseNewsWatcher.js');
+                    await import('./src/core/BaseUpdateWatcher.js');
+                    await import('./src/core/requestScheduler.js');
+                    await import('./src/core/utils.js');
+                    console.log('Core modules OK');
+                  "

@@ -15,11 +15,36 @@
  */
 
 import { createRequire } from "module";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const require = createRequire(import.meta.url);
 const config = require("../config.json");
 
 const API = config.apiBaseUrl; // http://localhost:8080/api/v1
 const DELAY_MS = 300;
+
+// State file to track which bots have been fully set up.
+// Pass --force to ignore it and re-run all bots.
+const STATE_FILE = path.join(__dirname, ".setup-state.json");
+const FORCE = process.argv.includes("--force");
+
+function loadState() {
+    try {
+        return JSON.parse(fs.readFileSync(STATE_FILE, "utf8"));
+    } catch {
+        return {};
+    }
+}
+
+function markDone(state, key) {
+    state[key] = true;
+    fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 4));
+}
 
 /* ═══════════════════════════════════════════════════════════
    HELPERS
@@ -946,6 +971,325 @@ const BOTS = [
         avatarUrl: "https://github.com/Netflix.png",
         bannerUrl: "https://opengraph.githubassets.com/1/Netflix/zuul",
     },
+    // ─── Game Development ────────────────────────────────────
+    {
+        key: "godot",
+        fullName: "Godot Engine",
+        description:
+            "Godot is a free, open-source game engine for 2D and 3D games, supporting GDScript, C#, and C++.",
+        website: "https://godotengine.org",
+        location: "godotengine.org",
+        githubUrl: "https://github.com/godotengine/godot",
+        avatarUrl: "https://github.com/godotengine.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/godotengine/godot",
+    },
+    {
+        key: "phaser",
+        fullName: "Phaser",
+        description:
+            "Phaser is a fast, free, and fun open-source HTML5 game framework for desktop and mobile browsers.",
+        website: "https://phaser.io",
+        location: "phaser.io",
+        githubUrl: "https://github.com/phaserjs/phaser",
+        avatarUrl: "https://github.com/phaserjs.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/phaserjs/phaser",
+    },
+    {
+        key: "unity",
+        fullName: "Unity",
+        description:
+            "Unity is a cross-platform game engine used to create 2D, 3D, AR, and VR games and simulations.",
+        website: "https://unity.com",
+        location: "unity.com",
+        avatarUrl: "https://github.com/Unity-Technologies.png",
+        bannerUrl:
+            "https://opengraph.githubassets.com/1/Unity-Technologies/UnityCsReference",
+    },
+    {
+        key: "bevy",
+        fullName: "Bevy Engine",
+        description:
+            "Bevy is a refreshingly simple data-driven game engine built in Rust, free and open source forever.",
+        website: "https://bevyengine.org",
+        location: "bevyengine.org",
+        githubUrl: "https://github.com/bevyengine/bevy",
+        avatarUrl: "https://github.com/bevyengine.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/bevyengine/bevy",
+    },
+    {
+        key: "unrealengine",
+        fullName: "Unreal Engine",
+        description:
+            "Unreal Engine is Epic Games' AAA game engine powering stunning real-time 3D experiences and games.",
+        website: "https://www.unrealengine.com",
+        location: "unrealengine.com",
+        avatarUrl: "https://github.com/EpicGames.png",
+        bannerUrl:
+            "https://opengraph.githubassets.com/1/EpicGames/UnrealEngine",
+    },
+    {
+        key: "huggingface",
+        fullName: "Hugging Face",
+        description:
+            "Hugging Face is the AI community building the future of machine learning with open models, datasets, and tools.",
+        website: "https://huggingface.co",
+        location: "huggingface.co",
+        githubUrl: "https://github.com/huggingface/transformers",
+        avatarUrl: "https://github.com/huggingface.png",
+        bannerUrl:
+            "https://opengraph.githubassets.com/1/huggingface/transformers",
+    },
+    {
+        key: "gemini",
+        fullName: "Google Gemini",
+        description:
+            "Google Gemini is Google's most capable AI model family, powering next-generation AI experiences.",
+        website: "https://deepmind.google/technologies/gemini",
+        location: "deepmind.google",
+        githubUrl: "https://github.com/google-gemini/generative-ai-js",
+        avatarUrl: "https://github.com/google-gemini.png",
+        bannerUrl:
+            "https://opengraph.githubassets.com/1/google-gemini/generative-ai-js",
+    },
+    {
+        key: "cohere",
+        fullName: "Cohere",
+        description:
+            "Cohere provides large language model APIs and tools for enterprises to build AI-powered products.",
+        website: "https://cohere.com",
+        location: "cohere.com",
+        githubUrl: "https://github.com/cohere-ai/cohere-python",
+        avatarUrl: "https://github.com/cohere-ai.png",
+        bannerUrl:
+            "https://opengraph.githubassets.com/1/cohere-ai/cohere-python",
+    },
+    {
+        key: "groq",
+        fullName: "Groq",
+        description:
+            "Groq delivers ultra-fast AI inference with its LPU hardware, enabling real-time AI applications.",
+        website: "https://groq.com",
+        location: "groq.com",
+        githubUrl: "https://github.com/groq/groq-python",
+        avatarUrl: "https://github.com/groq.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/groq/groq-python",
+    },
+    {
+        key: "autogen",
+        fullName: "Microsoft AutoGen",
+        description:
+            "AutoGen is Microsoft's open-source framework for building multi-agent AI systems.",
+        website: "https://microsoft.github.io/autogen",
+        location: "microsoft.github.io/autogen",
+        githubUrl: "https://github.com/microsoft/autogen",
+        avatarUrl: "https://github.com/microsoft.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/microsoft/autogen",
+    },
+    {
+        key: "semantickernel",
+        fullName: "Microsoft Semantic Kernel",
+        description:
+            "Semantic Kernel is Microsoft's open-source SDK for integrating LLMs into applications.",
+        website: "https://learn.microsoft.com/semantic-kernel",
+        location: "learn.microsoft.com",
+        githubUrl: "https://github.com/microsoft/semantic-kernel",
+        avatarUrl: "https://github.com/microsoft.png",
+        bannerUrl:
+            "https://opengraph.githubassets.com/1/microsoft/semantic-kernel",
+    },
+    {
+        key: "n8n",
+        fullName: "n8n",
+        description:
+            "n8n is an open-source workflow automation tool with AI capabilities and 400+ integrations.",
+        website: "https://n8n.io",
+        location: "n8n.io",
+        githubUrl: "https://github.com/n8n-io/n8n",
+        avatarUrl: "https://github.com/n8n-io.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/n8n-io/n8n",
+    },
+    {
+        key: "stability",
+        fullName: "Stability AI",
+        description:
+            "Stability AI is the company behind Stable Diffusion and other open generative AI models.",
+        website: "https://stability.ai",
+        location: "stability.ai",
+        githubUrl: "https://github.com/Stability-AI/generative-models",
+        avatarUrl: "https://github.com/Stability-AI.png",
+        bannerUrl:
+            "https://opengraph.githubassets.com/1/Stability-AI/generative-models",
+    },
+    {
+        key: "haystack",
+        fullName: "Haystack by deepset",
+        description:
+            "Haystack is an open-source LLM framework by deepset for building AI search and RAG pipelines.",
+        website: "https://haystack.deepset.ai",
+        location: "haystack.deepset.ai",
+        githubUrl: "https://github.com/deepset-ai/haystack",
+        avatarUrl: "https://github.com/deepset-ai.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/deepset-ai/haystack",
+    },
+    {
+        key: "mlflow",
+        fullName: "MLflow",
+        description:
+            "MLflow is an open-source platform for the machine learning lifecycle, tracking experiments and deployments.",
+        website: "https://mlflow.org",
+        location: "mlflow.org",
+        githubUrl: "https://github.com/mlflow/mlflow",
+        avatarUrl: "https://github.com/mlflow.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/mlflow/mlflow",
+    },
+    {
+        key: "anthropic",
+        fullName: "Anthropic",
+        description:
+            "Anthropic is an AI safety company building Claude, a family of AI assistants designed to be safe and helpful.",
+        website: "https://anthropic.com",
+        location: "anthropic.com",
+        githubUrl: "https://github.com/anthropics/anthropic-sdk-python",
+        avatarUrl: "https://github.com/anthropics.png",
+        bannerUrl:
+            "https://opengraph.githubassets.com/1/anthropics/anthropic-sdk-python",
+    },
+    {
+        key: "claudecode",
+        fullName: "Claude Code",
+        description:
+            "Claude Code is Anthropic's agentic coding tool that lives in the terminal and understands your codebase.",
+        website: "https://anthropic.com/claude-code",
+        location: "anthropic.com",
+        githubUrl: "https://github.com/anthropics/claude-code",
+        avatarUrl: "https://github.com/anthropics.png",
+        bannerUrl:
+            "https://opengraph.githubassets.com/1/anthropics/claude-code",
+    },
+    {
+        key: "mistral",
+        fullName: "Mistral AI",
+        description:
+            "Mistral AI builds open and efficient frontier language models for developers and enterprises.",
+        website: "https://mistral.ai",
+        location: "mistral.ai",
+        githubUrl: "https://github.com/mistralai/client-python",
+        avatarUrl: "https://github.com/mistralai.png",
+        bannerUrl:
+            "https://opengraph.githubassets.com/1/mistralai/client-python",
+    },
+    {
+        key: "llamaindex",
+        fullName: "LlamaIndex",
+        description:
+            "LlamaIndex is a data framework for building LLM applications with retrieval-augmented generation.",
+        website: "https://llamaindex.ai",
+        location: "llamaindex.ai",
+        githubUrl: "https://github.com/run-llama/llama_index",
+        avatarUrl: "https://github.com/run-llama.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/run-llama/llama_index",
+    },
+    {
+        key: "crewai",
+        fullName: "CrewAI",
+        description:
+            "CrewAI is a framework for orchestrating role-playing autonomous AI agents to complete complex tasks.",
+        website: "https://crewai.com",
+        location: "crewai.com",
+        githubUrl: "https://github.com/crewAIInc/crewAI",
+        avatarUrl: "https://github.com/crewAIInc.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/crewAIInc/crewAI",
+    },
+    {
+        key: "vllm",
+        fullName: "vLLM",
+        description:
+            "vLLM is a high-throughput and memory-efficient inference and serving engine for LLMs.",
+        website: "https://vllm.ai",
+        location: "vllm.ai",
+        githubUrl: "https://github.com/vllm-project/vllm",
+        avatarUrl: "https://github.com/vllm-project.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/vllm-project/vllm",
+    },
+    {
+        key: "dify",
+        fullName: "Dify",
+        description:
+            "Dify is an open-source LLM app development platform for building and operating AI applications.",
+        website: "https://dify.ai",
+        location: "dify.ai",
+        githubUrl: "https://github.com/langgenius/dify",
+        avatarUrl: "https://github.com/langgenius.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/langgenius/dify",
+    },
+    {
+        key: "litellm",
+        fullName: "LiteLLM",
+        description:
+            "LiteLLM is a unified API for calling 100+ LLMs using the OpenAI format.",
+        website: "https://litellm.ai",
+        location: "litellm.ai",
+        githubUrl: "https://github.com/BerriAI/litellm",
+        avatarUrl: "https://github.com/BerriAI.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/BerriAI/litellm",
+    },
+    {
+        key: "comfyui",
+        fullName: "ComfyUI",
+        description:
+            "ComfyUI is a powerful and modular stable diffusion GUI with a graph/nodes interface.",
+        website: "https://comfy.org",
+        location: "comfy.org",
+        githubUrl: "https://github.com/comfyanonymous/ComfyUI",
+        avatarUrl: "https://github.com/comfyanonymous.png",
+        bannerUrl:
+            "https://opengraph.githubassets.com/1/comfyanonymous/ComfyUI",
+    },
+    {
+        key: "deepseek",
+        fullName: "DeepSeek",
+        description:
+            "DeepSeek is an AI company developing powerful open-source large language models.",
+        website: "https://deepseek.com",
+        location: "deepseek.com",
+        githubUrl: "https://github.com/deepseek-ai/DeepSeek-V3",
+        avatarUrl: "https://github.com/deepseek-ai.png",
+        bannerUrl:
+            "https://opengraph.githubassets.com/1/deepseek-ai/DeepSeek-V3",
+    },
+    {
+        key: "flowise",
+        fullName: "Flowise",
+        description:
+            "Flowise is an open-source low-code tool for building LLM apps with a drag-and-drop UI.",
+        website: "https://flowiseai.com",
+        location: "flowiseai.com",
+        githubUrl: "https://github.com/FlowiseAI/Flowise",
+        avatarUrl: "https://github.com/FlowiseAI.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/FlowiseAI/Flowise",
+    },
+    {
+        key: "xai",
+        fullName: "xAI (Grok)",
+        description:
+            "xAI is Elon Musk's AI company building Grok, a large language model with real-time knowledge.",
+        website: "https://x.ai",
+        location: "x.ai",
+        githubUrl: "https://github.com/xai-org/grok-1",
+        avatarUrl: "https://github.com/xai-org.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/xai-org/grok-1",
+    },
+    {
+        key: "cursor",
+        fullName: "Cursor",
+        description:
+            "Cursor is the AI-first code editor built for pair programming with AI.",
+        website: "https://www.cursor.com",
+        location: "cursor.com",
+        githubUrl: null,
+        avatarUrl: "https://www.cursor.com/favicon.ico",
+        bannerUrl: null,
+    },
 ];
 
 /* ═══════════════════════════════════════════════════════════
@@ -953,15 +1297,24 @@ const BOTS = [
    ═══════════════════════════════════════════════════════════ */
 
 async function main() {
+    const state = loadState();
+    const pending = FORCE ? BOTS : BOTS.filter((b) => !state[b.key]);
+
+    if (!FORCE && pending.length < BOTS.length) {
+        console.log(
+            `  ⏭  Skipping ${BOTS.length - pending.length} already-setup bot(s). Use --force to re-run all.`,
+        );
+    }
+
     console.log(
-        `\n${"━".repeat(50)}\n  🚀 TDN Bot Setup — ${BOTS.length} bots\n${"━".repeat(50)}\n`,
+        `\n${"━".repeat(50)}\n  🚀 TDN Bot Setup — ${pending.length} bot(s) to process\n${"━".repeat(50)}\n`,
     );
 
     let success = 0;
     let failed = 0;
     const errors = [];
 
-    for (const bot of BOTS) {
+    for (const bot of pending) {
         const creds = config.bots[bot.key];
         if (!creds) {
             console.log(`⚠  ${bot.key}: missing from config.json — skipped`);
@@ -1028,6 +1381,7 @@ async function main() {
                 }
             }
 
+            markDone(state, bot.key);
             success++;
         } catch (e) {
             console.log(`  ❌ FAILED: ${e.message}`);
@@ -1041,7 +1395,7 @@ async function main() {
     // ── Summary ─────────────────────────────────────────────
     console.log(`\n${"━".repeat(50)}`);
     console.log(
-        `  ✅ Success: ${success}/${BOTS.length}   ❌ Failed: ${failed}/${BOTS.length}`,
+        `  ✅ Success: ${success}/${pending.length}   ❌ Failed: ${failed}/${pending.length}`,
     );
     if (errors.length > 0) {
         console.log(`\n  Errors:`);

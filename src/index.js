@@ -256,6 +256,57 @@ import { startBootstrapUpdatesBot } from "./bots/bootstrap/update.js";
 /* ── Three.js (update only) ────────────────────────────── */
 import { startThreeJSUpdatesBot } from "./bots/threejs/update.js";
 
+/* ── Godot Engine ───────────────────────────────────────── */
+import { startGodotNewsBot } from "./bots/godot/news.js";
+import { startGodotUpdatesBot } from "./bots/godot/update.js";
+
+/* ── Phaser (update only — no RSS feed) ────────────────── */
+import { startPhaserUpdatesBot } from "./bots/phaser/update.js";
+
+/* ── Unity (news only — no public GitHub repo) ─────────── */
+import { startUnityNewsBot } from "./bots/unity/news.js";
+
+/* ── Bevy Engine ────────────────────────────────────────── */
+import { startBevyNewsBot } from "./bots/bevy/news.js";
+import { startBevyUpdatesBot } from "./bots/bevy/update.js";
+
+/* ── Unreal Engine (news only — private GitHub repo) ────── */
+import { startUnrealEngineNewsBot } from "./bots/unrealengine/news.js";
+
+/* ── AI / LLM ──────────────────────────────────────────── */
+import { startHuggingFaceNewsBot } from "./bots/huggingface/news.js";
+import { startHuggingFaceUpdatesBot } from "./bots/huggingface/update.js";
+import { startGeminiNewsBot } from "./bots/gemini/news.js";
+import { startGeminiUpdatesBot } from "./bots/gemini/update.js";
+import { startCohereNewsBot } from "./bots/cohere/news.js";
+import { startCohereUpdatesBot } from "./bots/cohere/update.js";
+import { startGroqNewsBot } from "./bots/groq/news.js";
+import { startGroqUpdatesBot } from "./bots/groq/update.js";
+import { startAutoGenNewsBot } from "./bots/autogen/news.js";
+import { startAutoGenUpdatesBot } from "./bots/autogen/update.js";
+import { startSemanticKernelNewsBot } from "./bots/semantickernel/news.js";
+import { startSemanticKernelUpdatesBot } from "./bots/semantickernel/update.js";
+import { startN8NNewsBot } from "./bots/n8n/news.js";
+import { startN8NUpdatesBot } from "./bots/n8n/update.js";
+import { startStabilityUpdatesBot } from "./bots/stability/update.js";
+import { startHaystackNewsBot } from "./bots/haystack/news.js";
+import { startHaystackUpdatesBot } from "./bots/haystack/update.js";
+import { startMLflowNewsBot } from "./bots/mlflow/news.js";
+import { startMLflowUpdatesBot } from "./bots/mlflow/update.js";
+import { startAnthropicUpdatesBot } from "./bots/anthropic/update.js";
+import { startClaudeCodeUpdatesBot } from "./bots/claudecode/update.js";
+import { startMistralUpdatesBot } from "./bots/mistral/update.js";
+import { startLlamaIndexUpdatesBot } from "./bots/llamaindex/update.js";
+import { startCrewAIUpdatesBot } from "./bots/crewai/update.js";
+import { startVLLMUpdatesBot } from "./bots/vllm/update.js";
+import { startDifyUpdatesBot } from "./bots/dify/update.js";
+import { startLiteLLMUpdatesBot } from "./bots/litellm/update.js";
+import { startComfyUIUpdatesBot } from "./bots/comfyui/update.js";
+import { startDeepSeekUpdatesBot } from "./bots/deepseek/update.js";
+import { startFlowiseUpdatesBot } from "./bots/flowise/update.js";
+import { startXAIUpdatesBot } from "./bots/xai/update.js";
+import { startCursorNewsBot } from "./bots/cursor/news.js";
+
 /**
  * Bot registry. Each entry contains a display name and its start function.
  * @type {{ name: string, start: Function }[]}
@@ -378,6 +429,49 @@ const bots = [
     { name: "tRPC Updates", start: startTRPCUpdatesBot },
     { name: "Bootstrap Updates", start: startBootstrapUpdatesBot },
     { name: "Three.js Updates", start: startThreeJSUpdatesBot },
+
+    /* ── Game Development ────────────────────────────────── */
+    { name: "Godot News", start: startGodotNewsBot },
+    { name: "Godot Updates", start: startGodotUpdatesBot },
+    { name: "Phaser Updates", start: startPhaserUpdatesBot },
+    { name: "Unity News", start: startUnityNewsBot },
+    { name: "Bevy News", start: startBevyNewsBot },
+    { name: "Bevy Updates", start: startBevyUpdatesBot },
+    { name: "Unreal Engine News", start: startUnrealEngineNewsBot },
+
+    /* ── AI / LLM ──────────────────────────────────────────── */
+    { name: "HuggingFace News", start: startHuggingFaceNewsBot },
+    { name: "HuggingFace Updates", start: startHuggingFaceUpdatesBot },
+    { name: "Gemini News", start: startGeminiNewsBot },
+    { name: "Gemini Updates", start: startGeminiUpdatesBot },
+    { name: "Cohere News", start: startCohereNewsBot },
+    { name: "Cohere Updates", start: startCohereUpdatesBot },
+    { name: "Groq News", start: startGroqNewsBot },
+    { name: "Groq Updates", start: startGroqUpdatesBot },
+    { name: "AutoGen News", start: startAutoGenNewsBot },
+    { name: "AutoGen Updates", start: startAutoGenUpdatesBot },
+    { name: "Semantic Kernel News", start: startSemanticKernelNewsBot },
+    { name: "Semantic Kernel Updates", start: startSemanticKernelUpdatesBot },
+    { name: "n8n News", start: startN8NNewsBot },
+    { name: "n8n Updates", start: startN8NUpdatesBot },
+    { name: "Stability AI Updates", start: startStabilityUpdatesBot },
+    { name: "Haystack News", start: startHaystackNewsBot },
+    { name: "Haystack Updates", start: startHaystackUpdatesBot },
+    { name: "MLflow News", start: startMLflowNewsBot },
+    { name: "MLflow Updates", start: startMLflowUpdatesBot },
+    { name: "Anthropic Updates", start: startAnthropicUpdatesBot },
+    { name: "Claude Code Updates", start: startClaudeCodeUpdatesBot },
+    { name: "Mistral Updates", start: startMistralUpdatesBot },
+    { name: "LlamaIndex Updates", start: startLlamaIndexUpdatesBot },
+    { name: "CrewAI Updates", start: startCrewAIUpdatesBot },
+    { name: "vLLM Updates", start: startVLLMUpdatesBot },
+    { name: "Dify Updates", start: startDifyUpdatesBot },
+    { name: "LiteLLM Updates", start: startLiteLLMUpdatesBot },
+    { name: "ComfyUI Updates", start: startComfyUIUpdatesBot },
+    { name: "DeepSeek Updates", start: startDeepSeekUpdatesBot },
+    { name: "Flowise Updates", start: startFlowiseUpdatesBot },
+    { name: "xAI Updates", start: startXAIUpdatesBot },
+    { name: "Cursor News", start: startCursorNewsBot },
 ];
 
 /**

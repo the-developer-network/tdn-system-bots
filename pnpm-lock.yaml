@@ -10,6 +10,9 @@ importers:
             dotenv:
                 specifier: ^17.4.1
                 version: 17.4.1
+            fast-xml-parser:
+                specifier: ^5.5.10
+                version: 5.5.10
         devDependencies:
             husky:
                 specifier: ^9.1.7
@@ -96,6 +99,19 @@ packages:
                 integrity: sha512-mlsTRyGaPBjPedk6Bvw+aqbsXDtoAyAzm5MO7JgU+yVRyMQ5O8bD4Kcci7BS85f93veegeCPkL8R4GLClnjLFw==,
             }
 
+    fast-xml-builder@1.1.4:
+        resolution:
+            {
+                integrity: sha512-f2jhpN4Eccy0/Uz9csxh3Nu6q4ErKxf0XIsasomfOihuSUa3/xw6w8dnOtCDgEItQFJG8KyXPzQXzcODDrrbOg==,
+            }
+
+    fast-xml-parser@5.5.10:
+        resolution:
+            {
+                integrity: sha512-go2J2xODMc32hT+4Xr/bBGXMaIoiCwrwp2mMtAvKyvEFW6S/v5Gn2pBmE4nvbwNjGhpcAiOwEv7R6/GZ6XRa9w==,
+            }
+        hasBin: true
+
     get-east-asian-width@1.5.0:
         resolution:
             {
@@ -153,6 +169,13 @@ packages:
                 integrity: sha512-VXJjc87FScF88uafS3JllDgvAm+c/Slfz06lorj2uAY34rlUu0Nt+v8wreiImcrgAjjIHp1rXpTDlLOGw29WwQ==,
             }
         engines: { node: ">=18" }
+
+    path-expression-matcher@1.4.0:
+        resolution:
+            {
+                integrity: sha512-s4DQMxIdhj3jLFWd9LxHOplj4p9yQ4ffMGowFf3cpEgrrJjEhN0V5nxw4Ye1EViAGDoL4/1AeO6qHpqYPOzE4Q==,
+            }
+        engines: { node: ">=14.0.0" }
 
     picomatch@4.0.4:
         resolution:
@@ -231,6 +254,12 @@ packages:
             }
         engines: { node: ">=12" }
 
+    strnum@2.2.3:
+        resolution:
+            {
+                integrity: sha512-oKx6RUCuHfT3oyVjtnrmn19H1SiCqgJSg+54XqURKp5aCMbrXrhLjRN9TjuwMjiYstZ0MzDrHqkGZ5dFTKd+zg==,
+            }
+
     tinyexec@1.1.1:
         resolution:
             {
@@ -283,6 +312,16 @@ snapshots:
 
     eventemitter3@5.0.4: {}
 
+    fast-xml-builder@1.1.4:
+        dependencies:
+            path-expression-matcher: 1.4.0
+
+    fast-xml-parser@5.5.10:
+        dependencies:
+            fast-xml-builder: 1.1.4
+            path-expression-matcher: 1.4.0
+            strnum: 2.2.3
+
     get-east-asian-width@1.5.0: {}
 
     husky@9.1.7: {}
@@ -323,6 +362,8 @@ snapshots:
         dependencies:
             mimic-function: 5.0.1
 
+    path-expression-matcher@1.4.0: {}
+
     picomatch@4.0.4: {}
 
     prettier@3.8.1: {}
@@ -362,6 +403,8 @@ snapshots:
     strip-ansi@7.2.0:
         dependencies:
             ansi-regex: 6.2.2
+
+    strnum@2.2.3: {}
 
     tinyexec@1.1.1: {}
 

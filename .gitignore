@@ -1,4 +1,23 @@
-config.json
-assets
+# Dependencies
 node_modules
+
+# Environment & secrets
 .env
+config.json
+
+# Runtime / generated
+bots.log
+*.log
+
+# Bot runtime state files (last-seen article/release per bot)
+**/*_state.json
+
+# Setup script state (environment-specific)
+scripts/.setup-state.json
+
+# Assets (avatars, banners — large binary files)
+assets
+
+# OS
+.DS_Store
+Thumbs.db

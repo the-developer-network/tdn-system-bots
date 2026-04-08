@@ -1,22 +1,85 @@
 /**
  * @module core/BaseNewsWatcher
  * @description RSS-based news watcher base class.
- * Periodically polls an RSS feed and emits a 'new_article' event
- * when a new entry is detected. Uses rss2json API for RSS-to-JSON conversion.
+ * Periodically polls an RSS feed directly (no third-party proxy) and emits
+ * a 'new_article' event when a new entry is detected. Supports RSS 2.0 and Atom.
  */
 
 import { EventEmitter } from "events";
 import fs from "fs";
 import path from "path";
+import { XMLParser } from "fast-xml-parser";
 import { log } from "../logger.js";
 import { scheduledFetch } from "./requestScheduler.js";
 
-/** @constant {string} RSS-to-JSON proxy API base URL */
-const RSS2JSON_BASE = "https://api.rss2json.com/v1/api.json?rss_url=";
+/** @type {XMLParser} Shared XML parser (attribute names prefixed with @_) */
+const xmlParser = new XMLParser({
+    ignoreAttributes: false,
+    attributeNamePrefix: "@_",
+    isArray: (name) => ["item", "entry"].includes(name),
+    // RSS feeds from trusted sources can have many entity references; raise
+    // the security limits well above the 1000-expansion default.
+    processEntities: {
+        enabled: true,
+        maxTotalExpansions: Infinity,
+        maxEntityCount: Infinity,
+        maxEntitySize: 1_000_000,
+        maxExpandedLength: 10_000_000,
+    },
+});
+
+/**
+ * Extracts a normalised article object from a raw RSS 2.0 item or Atom entry.
+ * @param {object} item - Parsed XML item/entry node
+ * @returns {{ title: string, link: string, description: string, thumbnail: string|null }|null}
+ */
+function normaliseItem(item) {
+    if (!item) return null;
+
+    const title =
+        typeof item.title === "object" ? item.title["#text"] : item.title;
+
+    let link = item.link;
+    if (typeof link === "object") {
+        const links = Array.isArray(link) ? link : [link];
+        const alt = links.find(
+            (l) => l["@_rel"] === "alternate" || !l["@_rel"],
+        );
+        link = alt?.["@_href"] ?? alt ?? null;
+    }
+
+    const rawDesc =
+        item.description ??
+        item.summary ??
+        item.content ??
+        item["content:encoded"] ??
+        "";
+    const description =
+        typeof rawDesc === "object"
+            ? (rawDesc["#text"] ?? "")
+            : String(rawDesc);
+
+    let thumbnail = null;
+    if (item["media:thumbnail"]?.["@_url"]) {
+        thumbnail = item["media:thumbnail"]["@_url"];
+    } else if (item["media:content"]?.["@_url"]) {
+        thumbnail = item["media:content"]["@_url"];
+    } else if (item.enclosure?.["@_url"]) {
+        const ct = item.enclosure["@_type"] ?? "";
+        if (ct.startsWith("image/")) thumbnail = item.enclosure["@_url"];
+    }
+
+    if (!title || !link) return null;
+    return {
+        title: String(title),
+        link: String(link),
+        description,
+        thumbnail,
+    };
+}
 
 /**
  * RSS feed watcher base class.
- * Each bot uses this class to monitor its own RSS source.
  * @extends EventEmitter
  * @fires BaseNewsWatcher#new_article
  */
@@ -33,8 +96,8 @@ export class BaseNewsWatcher extends EventEmitter {
 
         /** @type {string} Watcher name */
         this.name = name;
-        /** @type {string} Full rss2json API URL */
-        this.apiUrl = `${RSS2JSON_BASE}${encodeURIComponent(rssUrl)}`;
+        /** @type {string} RSS feed URL fetched directly */
+        this.rssUrl = rssUrl;
         /** @type {string} Absolute path to news_state.json */
         this.stateFile = path.join(stateDir, "news_state.json");
         /** @type {number} Base polling interval in milliseconds */
@@ -99,29 +162,38 @@ export class BaseNewsWatcher extends EventEmitter {
         log(this.name, "INFO", "Checking for new articles...");
         try {
             const state = this.readState();
-            const headers = { "User-Agent": "TDN-System-Bot" };
+            const headers = {
+                "User-Agent": "TDN-System-Bot/1.0 (RSS reader)",
+                Accept: "application/rss+xml, application/atom+xml, application/xml, text/xml, */*",
+            };
 
-            // If we stored a last-modified we can use If-Modified-Since
-            if (state.lastFetched) {
-                headers["If-Modified-Since"] = state.lastFetched;
-            }
+            if (state.lastEtag) headers["If-None-Match"] = state.lastEtag;
+            else if (state.lastModified)
+                headers["If-Modified-Since"] = state.lastModified;
 
             const response = await scheduledFetch(
-                this.apiUrl,
+                this.rssUrl,
                 { headers },
                 "rss",
             );
 
-            if (response.status === 429) {
-                log(this.name, "WARN", `RSS fetch rate limited (429).`);
-                this._backoff =
-                    this._backoff === 0
-                        ? 60 * 1000
-                        : Math.min(this._backoff * 2, 60 * 60 * 1000);
+            if (response.status === 304) {
+                log(this.name, "INFO", "No new articles (304 Not Modified).");
+                this._backoff = 0;
+                return;
+            }
+
+            if (response.status === 429 || response.status === 403) {
+                const retryAfter = response.headers.get("retry-after");
+                this._backoff = retryAfter
+                    ? Number(retryAfter) * 1000
+                    : this._backoff === 0
+                      ? 60_000
+                      : Math.min(this._backoff * 2, 60 * 60_000);
                 log(
                     this.name,
                     "WARN",
-                    `Backing off for ${Math.round(this._backoff / 1000)}s`,
+                    `RSS fetch rate limited (${response.status}). Backing off for ${Math.round(this._backoff / 1000)}s`,
                 );
                 return;
             }
@@ -135,45 +207,58 @@ export class BaseNewsWatcher extends EventEmitter {
                 return;
             }
 
-            const data = await response.json();
+            // Cache revalidation headers for next poll
+            const newState = {};
+            const etag = response.headers.get("etag");
+            const lastModified = response.headers.get("last-modified");
+            if (etag) newState.lastEtag = etag;
+            else if (lastModified) newState.lastModified = lastModified;
 
-            if (data.status !== "ok" || !data.items || !data.items.length) {
-                log(
-                    this.name,
-                    "WARN",
-                    "RSS feed returned no items or invalid status.",
-                );
+            const xml = await response.text();
+            const parsed = xmlParser.parse(xml);
+
+            // Support RSS 2.0 (`rss.channel.item`) and Atom (`feed.entry`)
+            const items =
+                parsed?.rss?.channel?.item ?? parsed?.feed?.entry ?? null;
+
+            if (!items || (Array.isArray(items) && items.length === 0)) {
+                log(this.name, "WARN", "RSS feed returned no items.");
                 this._backoff = 0;
                 return;
             }
 
-            const latestArticle = data.items[0];
+            const latest = normaliseItem(
+                Array.isArray(items) ? items[0] : items,
+            );
+
+            if (!latest) {
+                log(this.name, "WARN", "Could not parse latest item.");
+                this._backoff = 0;
+                return;
+            }
+
             const lastSavedLink = this.getLastSavedLink();
 
-            if (latestArticle.link !== lastSavedLink) {
+            if (latest.link !== lastSavedLink) {
                 log(
                     this.name,
                     "SUCCESS",
-                    `New article detected: ${latestArticle.title}`,
+                    `New article detected: ${latest.title}`,
                 );
-                this.saveState({
-                    lastLink: latestArticle.link,
-                    lastFetched: new Date().toUTCString(),
-                });
-
-                this.emit("new_article", latestArticle);
+                this.saveState({ lastLink: latest.link, ...newState });
+                this.emit("new_article", latest);
             } else {
                 log(this.name, "INFO", "No new articles. Going back to sleep.");
+                if (Object.keys(newState).length) this.saveState(newState);
             }
 
-            // reset backoff on success
             this._backoff = 0;
         } catch (error) {
             log(this.name, "ERROR", `Feed check failed: ${error.message}`);
             this._backoff =
                 this._backoff === 0
-                    ? 30 * 1000
-                    : Math.min(this._backoff * 2, 60 * 60 * 1000);
+                    ? 30_000
+                    : Math.min(this._backoff * 2, 60 * 60_000);
         }
     }
 
