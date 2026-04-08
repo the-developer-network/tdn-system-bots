@@ -5,6 +5,7 @@
  * Each bot runs independently; a failure in one does not affect the others.
  */
 
+import "dotenv/config";
 import { log } from "./logger.js";
 
 /* ── TypeScript ─────────────────────────────────────────── */
@@ -384,6 +385,21 @@ const bots = [
  * try/catch so that a failure in one does not prevent the others from starting.
  */
 async function bootstrap() {
+    // Verify GitHub token is loaded
+    if (process.env.GITHUB_TOKEN) {
+        log(
+            "SYSTEM",
+            "SUCCESS",
+            "GitHub token loaded — authenticated API access enabled (5,000 req/h).",
+        );
+    } else {
+        log(
+            "SYSTEM",
+            "WARN",
+            "GITHUB_TOKEN not set — using unauthenticated API (60 req/h). Set it in .env file.",
+        );
+    }
+
     log(
         "SYSTEM",
         "INFO",
