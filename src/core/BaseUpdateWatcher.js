@@ -67,13 +67,11 @@ export class BaseUpdateWatcher extends EventEmitter {
      */
     saveState(state) {
         const dir = path.dirname(this.stateFile);
-        if (!fs.existsSync(dir)) {
-            fs.mkdirSync(dir, { recursive: true });
-        }
+        if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+
+        const existing = this.readState();
         const out = {
-            ...(fs.existsSync(this.stateFile)
-                ? JSON.parse(fs.readFileSync(this.stateFile, "utf-8"))
-                : {}),
+            ...existing,
             ...state,
             updatedAt: new Date().toISOString(),
         };
