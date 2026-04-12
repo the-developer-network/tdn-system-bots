@@ -24,6 +24,12 @@ const __dirname = path.dirname(__filename);
 
 const require = createRequire(import.meta.url);
 const config = require("../config.json");
+let tokens = {};
+try {
+    tokens = require("../bot-tokens-private.json");
+} catch (e) {
+    // No bot-tokens-private.json found — proceed without static tokens
+}
 
 const API = config.apiBaseUrl; // http://localhost:8080/api/v1
 const DELAY_MS = 300;
@@ -77,19 +83,29 @@ async function loginBot(identifier, password) {
     return json.data.accessToken;
 }
 
-async function patchProfile(token, { fullName, bio, location }) {
+async function patchProfile(
+    token,
+    { fullName, bio, location },
+    scheme = "Bearer",
+) {
     const res = await fetch(`${API}/profiles/me`, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `${scheme} ${token}`,
         },
         body: JSON.stringify({ fullName, bio, location }),
     });
     if (!res.ok) throw new Error(`Profile update failed (${res.status})`);
 }
 
-async function uploadImage(token, endpoint, fieldName, imageUrl) {
+async function uploadImage(
+    token,
+    endpoint,
+    fieldName,
+    imageUrl,
+    scheme = "Bearer",
+) {
     // 1 — Download image from public URL
     const imgRes = await fetch(imageUrl, { redirect: "follow" });
     if (!imgRes.ok)
@@ -108,7 +124,7 @@ async function uploadImage(token, endpoint, fieldName, imageUrl) {
     // 3 — Upload (do NOT set Content-Type — let fetch add boundary)
     const res = await fetch(`${API}${endpoint}`, {
         method: "PATCH",
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `${scheme} ${token}` },
         body: form,
     });
     if (!res.ok) throw new Error(`Upload ${fieldName} failed (${res.status})`);
@@ -1326,29 +1342,50 @@ async function main() {
         console.log(`\n── ${bot.fullName} (${bot.key}) ──`);
 
         try {
-            // 1 — Register
-            const reg = await registerBot(
-                creds.email,
-                creds.username,
-                creds.password,
-            );
-            console.log(
-                reg.ok
-                    ? "  ✅ Registered"
-                    : `  ℹ️  Registration skipped (${reg.status})`,
-            );
+            // Determine static token (from bot-tokens-private.json) — prefer key, then username, then email
+            const staticToken =
+                tokens && typeof tokens === "object"
+                    ? tokens[bot.key] ||
+                      (creds && (tokens[creds.username] || tokens[creds.email]))
+                    : null;
+            let token;
+            let authScheme = "Bearer";
 
-            // 2 — Login
-            const token = await loginBot(creds.username, creds.password);
-            console.log("  ✅ Logged in");
+            if (staticToken) {
+                console.log(
+                    "  ℹ️ Using static token from bot-tokens-private.json — skipping register/login",
+                );
+                token = staticToken;
+                authScheme = "Bot";
+            } else {
+                // 1 — Register
+                const reg = await registerBot(
+                    creds.email,
+                    creds.username,
+                    creds.password,
+                );
+                console.log(
+                    reg.ok
+                        ? "  ✅ Registered"
+                        : `  ℹ️  Registration skipped (${reg.status})`,
+                );
+
+                // 2 — Login
+                token = await loginBot(creds.username, creds.password);
+                console.log("  ✅ Logged in");
+            }
 
             // 3 — Profile
             const bio = buildBio(bot);
-            await patchProfile(token, {
-                fullName: bot.fullName,
-                bio,
-                location: bot.location,
-            });
+            await patchProfile(
+                token,
+                {
+                    fullName: bot.fullName,
+                    bio,
+                    location: bot.location,
+                },
+                authScheme,
+            );
             console.log("  ✅ Profile updated");
 
             // 4 — Avatar
@@ -1359,6 +1396,7 @@ async function main() {
                         "/profiles/me/avatar",
                         "avatar",
                         bot.avatarUrl,
+                        authScheme,
                     );
                     console.log("  ✅ Avatar uploaded");
                 } catch (e) {
@@ -1374,6 +1412,7 @@ async function main() {
                         "/profiles/me/banner",
                         "banner",
                         bot.bannerUrl,
+                        authScheme,
                     );
                     console.log("  ✅ Banner uploaded");
                 } catch (e) {
