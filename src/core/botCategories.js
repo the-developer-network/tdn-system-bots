@@ -1,0 +1,128 @@
+/**
+ * Maps each bot name (as used in config.json) to its TDN post categories.
+ * Used by TdnClient.createPost to automatically inject the `categories` field.
+ *
+ * Valid category values: "AI" | "GAME" | "MOBILE" | "BACKEND" | "FRONTEND"
+ */
+export const BOT_CATEGORIES = {
+    // AI
+    anthropic: ["AI"],
+    autogen: ["AI"],
+    claudecode: ["AI"],
+    cohere: ["AI"],
+    comfyui: ["AI"],
+    crewai: ["AI"],
+    cursor: ["AI"],
+    deepseek: ["AI"],
+    dify: ["AI"],
+    flowise: ["AI"],
+    gemini: ["AI"],
+    google: ["AI"],
+    groq: ["AI"],
+    haystack: ["AI"],
+    huggingface: ["AI"],
+    langchain: ["AI"],
+    litellm: ["AI"],
+    llamaindex: ["AI"],
+    meta: ["AI"],
+    mistral: ["AI"],
+    mlflow: ["AI"],
+    ollama: ["AI"],
+    openai: ["AI"],
+    pytorch: ["AI"],
+    semantickernel: ["AI"],
+    stability: ["AI"],
+    tensorflow: ["AI"],
+    vllm: ["AI"],
+    xai: ["AI"],
+
+    // GAME
+    bevy: ["GAME"],
+    godot: ["GAME"],
+    phaser: ["GAME"],
+    unity: ["GAME"],
+    unrealengine: ["GAME"],
+
+    // MOBILE
+    flutter: ["MOBILE"],
+
+    // BACKEND
+    aws: ["BACKEND"],
+    cloudflare: ["BACKEND"],
+    django: ["BACKEND"],
+    docker: ["BACKEND"],
+    dotnet: ["BACKEND"],
+    drizzle: ["BACKEND"],
+    elixir: ["BACKEND"],
+    express: ["BACKEND"],
+    fastapi: ["BACKEND"],
+    fastify: ["BACKEND"],
+    github: ["BACKEND"],
+    go: ["BACKEND"],
+    grafana: ["BACKEND"],
+    hono: ["BACKEND"],
+    java: ["BACKEND"],
+    kubernetes: ["BACKEND"],
+    laravel: ["BACKEND"],
+    mongodb: ["BACKEND"],
+    nestjs: ["BACKEND"],
+    netflix: ["BACKEND"],
+    nodejs: ["BACKEND"],
+    php: ["BACKEND"],
+    prisma: ["BACKEND"],
+    prometheus: ["BACKEND"],
+    python: ["BACKEND"],
+    rails: ["BACKEND"],
+    redis: ["BACKEND"],
+    ruby: ["BACKEND"],
+    rust: ["BACKEND"],
+    springboot: ["BACKEND"],
+    supabase: ["BACKEND"],
+    terraform: ["BACKEND"],
+    zig: ["BACKEND"],
+
+    // FRONTEND
+    alpinejs: ["FRONTEND"],
+    angular: ["FRONTEND"],
+    astro: ["FRONTEND"],
+    biome: ["FRONTEND"],
+    bootstrap: ["FRONTEND"],
+    electron: ["FRONTEND"],
+    esbuild: ["FRONTEND"],
+    eslint: ["FRONTEND"],
+    htmx: ["FRONTEND"],
+    nuxt: ["FRONTEND"],
+    playwright: ["FRONTEND"],
+    pnpm: ["FRONTEND"],
+    prettier: ["FRONTEND"],
+    react: ["FRONTEND"],
+    solidjs: ["FRONTEND"],
+    svelte: ["FRONTEND"],
+    swc: ["FRONTEND"],
+    tailwindcss: ["FRONTEND"],
+    threejs: ["FRONTEND"],
+    vite: ["FRONTEND"],
+    vitest: ["FRONTEND"],
+    vue: ["FRONTEND"],
+    webpack: ["FRONTEND"],
+
+    // FRONTEND + BACKEND
+    bun: ["FRONTEND", "BACKEND"],
+    deno: ["FRONTEND", "BACKEND"],
+    nextjs: ["FRONTEND", "BACKEND"],
+    remix: ["FRONTEND", "BACKEND"],
+    tauri: ["FRONTEND", "BACKEND"],
+    trpc: ["FRONTEND", "BACKEND"],
+    typescript: ["FRONTEND", "BACKEND"],
+    vercel: ["FRONTEND", "BACKEND"],
+
+    // BACKEND + MOBILE
+    kotlin: ["BACKEND", "MOBILE"],
+    swift: ["BACKEND", "MOBILE"],
+
+    // FRONTEND + MOBILE
+    reactnative: ["FRONTEND", "MOBILE"],
+
+    // AI + BACKEND
+    n8n: ["AI", "BACKEND"],
+};
