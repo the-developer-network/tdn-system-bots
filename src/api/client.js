@@ -1,4 +1,5 @@
 import { log } from "../logger.js";
+import { BOT_CATEGORIES } from "../core/botCategories.js";
 
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
@@ -164,14 +165,18 @@ class TdnClient {
 
     /**
      * Creates a new post on the TDN platform.
-     * @param {{ content: string, type: string, mediaUrls: string[] }} payload - Post data
+     * @param {{ content: string, type: string, mediaUrls: string[], categories: string[] }} payload - Post data
      * @returns {Promise<object|null>} API response on success, null on failure
      */
     async createPost(payload) {
         try {
+            const categories =
+                payload.categories ?? BOT_CATEGORIES[this.botName] ?? [];
+            const body = { ...payload, categories };
+
             const response = await this.fetchWithAuth("/posts", {
                 method: "POST",
-                body: JSON.stringify(payload),
+                body: JSON.stringify(body),
             });
 
             if (!response.ok) {
