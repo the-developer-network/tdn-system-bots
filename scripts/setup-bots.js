@@ -830,6 +830,51 @@ const BOTS = [
         bannerUrl: "https://opengraph.githubassets.com/1/facebook/react-native",
     },
     {
+        key: "expo",
+        fullName: "Expo",
+        description:
+            "Expo is an open-source platform for making universal native apps for Android, iOS, and the web with JavaScript and React.",
+        website: "https://expo.dev",
+        location: "expo.dev",
+        githubUrl: "https://github.com/expo/expo",
+        avatarUrl: "https://github.com/expo.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/expo/expo",
+    },
+    {
+        key: "ionic",
+        fullName: "Ionic",
+        description:
+            "Ionic is an open-source UI toolkit for building performant, high-quality mobile and desktop apps using web technologies.",
+        website: "https://ionicframework.com",
+        location: "ionicframework.com",
+        githubUrl: "https://github.com/ionic-team/ionic-framework",
+        avatarUrl: "https://github.com/ionic-team.png",
+        bannerUrl:
+            "https://opengraph.githubassets.com/1/ionic-team/ionic-framework",
+    },
+    {
+        key: "maui",
+        fullName: ".NET MAUI",
+        description:
+            ".NET MAUI is a cross-platform framework by Microsoft for building native mobile and desktop apps with C# and XAML.",
+        website: "https://dotnet.microsoft.com/apps/maui",
+        location: "dotnet.microsoft.com",
+        githubUrl: "https://github.com/dotnet/maui",
+        avatarUrl: "https://github.com/dotnet.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/dotnet/maui",
+    },
+    {
+        key: "capacitor",
+        fullName: "Capacitor",
+        description:
+            "Capacitor is a cross-platform native runtime for building web-native apps that run on iOS, Android, and the web.",
+        website: "https://capacitorjs.com",
+        location: "capacitorjs.com",
+        githubUrl: "https://github.com/ionic-team/capacitor",
+        avatarUrl: "https://github.com/ionic-team.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/ionic-team/capacitor",
+    },
+    {
         key: "electron",
         fullName: "Electron",
         description:

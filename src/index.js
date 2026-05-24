@@ -8,6 +8,26 @@
 import "dotenv/config";
 import { log } from "./logger.js";
 
+// Node.js v22+ changed undici's HTTP/2 behavior: when the remote server closes
+// a connection (e.g. keep-alive timeout), it now emits an unhandled 'error'
+// event on ClientHttp2Stream instead of silently retrying, which would crash
+// the process. We catch these socket errors here and log them instead.
+process.on("uncaughtException", (err) => {
+    if (
+        err.code === "UND_ERR_SOCKET" ||
+        err.code === "UND_ERR_CONNECT_TIMEOUT"
+    ) {
+        log(
+            "Process",
+            "WARN",
+            `Suppressed undici socket error: ${err.message}`,
+        );
+        return;
+    }
+    log("Process", "ERROR", `Uncaught exception: ${err.message}`);
+    process.exit(1);
+});
+
 /* ── TypeScript ─────────────────────────────────────────── */
 import { startTypeScriptNewsBot } from "./bots/typescript/news.js";
 import { startTypeScriptUpdatesBot } from "./bots/typescript/update.js";
@@ -195,6 +215,20 @@ import { startFlutterUpdatesBot } from "./bots/flutter/update.js";
 
 /* ── React Native (update only) ────────────────────────── */
 import { startReactNativeUpdatesBot } from "./bots/reactnative/update.js";
+
+/* ── Expo ───────────────────────────────────────────────── */
+import { startExpoNewsBot } from "./bots/expo/news.js";
+import { startExpoUpdatesBot } from "./bots/expo/update.js";
+
+/* ── Ionic ──────────────────────────────────────────────── */
+import { startIonicNewsBot } from "./bots/ionic/news.js";
+import { startIonicUpdatesBot } from "./bots/ionic/update.js";
+
+/* ── .NET MAUI (update only) ───────────────────────────── */
+import { startMauiUpdatesBot } from "./bots/maui/update.js";
+
+/* ── Capacitor (update only) ───────────────────────────── */
+import { startCapacitorUpdatesBot } from "./bots/capacitor/update.js";
 
 /* ── Electron (update only) ────────────────────────────── */
 import { startElectronUpdatesBot } from "./bots/electron/update.js";
@@ -405,6 +439,12 @@ const bots = [
     { name: "Flutter News", start: startFlutterNewsBot },
     { name: "Flutter Updates", start: startFlutterUpdatesBot },
     { name: "React Native Updates", start: startReactNativeUpdatesBot },
+    { name: "Expo News", start: startExpoNewsBot },
+    { name: "Expo Updates", start: startExpoUpdatesBot },
+    { name: "Ionic News", start: startIonicNewsBot },
+    { name: "Ionic Updates", start: startIonicUpdatesBot },
+    { name: "MAUI Updates", start: startMauiUpdatesBot },
+    { name: "Capacitor Updates", start: startCapacitorUpdatesBot },
     { name: "Electron Updates", start: startElectronUpdatesBot },
     { name: "Tauri Updates", start: startTauriUpdatesBot },
     { name: "PyTorch Updates", start: startPyTorchUpdatesBot },

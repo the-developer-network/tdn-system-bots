@@ -3,86 +3,52 @@
 ## Commands
 
 ```bash
-pnpm start                  # Run all bots (node ./src/index.js)
-node scripts/setup-bots.js  # One-time: register all bot accounts against the API
-```
-
-Formatting is enforced automatically on commit via Husky + lint-staged (Prettier). To format manually:
-
-```bash
+pnpm install
+pnpm start
+node scripts/setup-bots.js
+node scripts/setup-bots.js --force
+pnpm exec prettier --check .
 pnpm exec prettier --write .
+find src scripts -name "*.js" | xargs -I{} node --check {}
+node --check src/bots/typescript/update.js
 ```
 
-There is no test suite.
+There is no build step or automated test suite. CI currently runs Prettier plus `node --check` syntax validation.
+
+`README.md` and `CONTRIBUTING.md` both mention `config.example.json`, but that file is not in the repository. Create `config.json` manually from the schema shown in `README.md`.
 
 ## Architecture
 
-This is a Node.js ESM project (`"type": "module"`) that runs ~80 tech-topic bots. Each bot monitors either a GitHub releases feed, an RSS feed, or both, and publishes posts to a TDN social platform via a REST API.
+This is a Node.js ESM project (`"type": "module"`) made up of many small bot adapters around a shared watcher/client pipeline. Each technology bot watches GitHub releases, an RSS/Atom feed, or both, then publishes a normalized post to the TDN API.
 
-### Layer overview
+### Big picture
 
-```
-src/
-  index.js               — Entry point. Imports every bot module and starts them all.
-  logger.js              — Shared timestamped, color-coded console logger.
-  api/
-    client.js            — TdnClient: per-bot HTTP client with login, token refresh, createPost().
-  core/
-    BaseUpdateWatcher.js — EventEmitter that polls GitHub releases API; emits 'new_update'.
-    BaseNewsWatcher.js   — EventEmitter that polls RSS via rss2json; emits 'new_article'.
-    requestScheduler.js  — Centralized rate-limited fetch queue (separate lanes: 'github', 'rss').
-    utils.js             — buildNewsPost(), buildUpdatePost(), HTML/Markdown strippers.
-  bots/
-    {name}/
-      update.js          — Concrete update bot: wires BaseUpdateWatcher → TdnClient.createPost().
-      news.js            — Concrete news bot: wires BaseNewsWatcher → TdnClient.createPost().
-scripts/
-  setup-bots.js          — Registers, logs in, and sets profile/avatar/banner for each bot account.
-config.json              — Bot credentials + API base URL (gitignored; must be created locally).
-```
+- `src/index.js` is the runtime registry. It imports every bot module, builds the `bots` array, starts each watcher sequentially, and isolates startup failures so one broken bot does not stop the rest.
+- `src/bots/{name}/news.js` and `src/bots/{name}/update.js` are intentionally thin. They instantiate one base watcher, listen for `new_article` or `new_update`, call `buildNewsPost()` or `buildUpdatePost()`, and hand the result to `createTdnClient("{name}")`.
+- `src/core/BaseUpdateWatcher.js` handles GitHub release polling with ETag caching, optional `GITHUB_TOKEN` auth, jittered polling, and exponential backoff on errors or 403/429 responses.
+- `src/core/BaseNewsWatcher.js` fetches RSS/Atom feeds directly, parses XML with `fast-xml-parser`, caches `ETag`/`Last-Modified`, normalizes feed items, and uses the same backoff/jitter pattern as update watchers.
+- `src/core/requestScheduler.js` is the shared throttle point for outbound traffic. GitHub and RSS requests use separate lanes with different concurrency and minimum-delay limits, and the scheduler pauses a lane when upstream rate limiting happens.
+- `src/api/client.js` is the TDN publishing boundary. It reads credentials from `config.json`, optionally uses static tokens from `bot-tokens-private.json`, injects default categories from `src/core/botCategories.js`, and retries once on 401 when using bearer-token auth.
+- `scripts/setup-bots.js` provisions the bot accounts on the TDN platform, updates their profiles and media, and tracks completed work in `scripts/.setup-state.json`.
 
 ### Data flow
 
-1. `BaseUpdateWatcher` / `BaseNewsWatcher` polls its API on an interval with jitter.
-2. On a new result it emits `new_update` or `new_article`.
-3. The bot module handles the event, calls `buildUpdatePost()` / `buildNewsPost()`, and calls `client.createPost()`.
-4. `TdnClient` sends the post to `POST /posts` with Bearer auth, auto-refreshing the token on 401.
-5. State (last seen tag or article link) is persisted as `updates_state.json` / `news_state.json` **inside the bot's own directory** (`__dirname`-relative).
-
-### Rate limiting
-
-`requestScheduler.js` routes all outbound fetches through two lanes:
-
-- `github`: max 2 concurrent, 600 ms minimum between requests
-- `rss`: max 1 concurrent, 5 s minimum between requests (rss2json free tier)
-
-Both watchers implement exponential backoff (initial 30 s, max 1 h) on errors or 429/403 responses. Startup jitter spreads initial requests over 1–2 minutes to avoid thundering-herd bursts.
+1. A watcher polls GitHub or an RSS/Atom feed through `scheduledFetch()`.
+2. The watcher compares the latest result with the bot-local state file and emits `new_update` or `new_article` only when something changed.
+3. The concrete bot module converts that event into a TDN payload with the helpers in `src/core/utils.js`.
+4. `TdnClient.createPost()` sends the payload to `POST /posts`, adding categories automatically when a `BOT_CATEGORIES` mapping exists.
 
 ## Key Conventions
 
-### Adding a new bot
+- Every bot module is ESM and computes `__dirname` via `fileURLToPath(import.meta.url)` before passing `stateDir: __dirname` into the watcher. State is intentionally stored beside the bot module as `news_state.json` or `updates_state.json`, not in a central cache directory.
+- When adding a bot, update all of the coordinated surfaces: `config.json`, `src/bots/{name}/news.js` and/or `update.js`, `src/index.js`, `scripts/setup-bots.js`, and usually `src/core/botCategories.js`.
+- Export exactly one start function per bot file (`start{Name}NewsBot()` or `start{Name}UpdatesBot()`). `src/index.js` depends on that naming pattern for its explicit import-and-registry style.
+- Build post payloads with `buildNewsPost()` and `buildUpdatePost()` instead of composing strings inline. Those helpers enforce the 300-character post cap and the expected payload shape: `{ content, type, mediaUrls }`.
+- News posts may include a thumbnail in `mediaUrls`; update posts should leave `mediaUrls` empty.
+- `bot-tokens-private.json` is an optional local-only auth override. If present, `TdnClient` sends `Authorization: Bot <token>` and `scripts/setup-bots.js` can skip register/login for that bot.
+- Preserve the process-level `uncaughtException` handling in `src/index.js` unless you are intentionally changing startup behavior. It suppresses known undici socket/connect timeout crashes on newer Node versions but still exits on other uncaught exceptions.
+- Do not commit `config.json`, `bot-tokens-private.json`, `**/*_state.json`, or `scripts/.setup-state.json`; they are environment-specific runtime data.
 
-1. Add the bot entry to `config.json` under `bots` with `username`, `email`, `password`.
-2. Create `src/bots/{name}/update.js` and/or `src/bots/{name}/news.js` using an existing bot as a template (e.g., `src/bots/typescript/`).
-    - Export a single `start{Name}{Type}Bot()` function.
-    - Pass `stateDir: __dirname` to the watcher so state files land next to the module.
-    - Use `createTdnClient("{name}")` where `{name}` matches the key in `config.json`.
-3. Import and call the start function in `src/index.js`.
-4. Run `node scripts/setup-bots.js` to provision the new account on the platform.
+## Formatting
 
-### Post payload shape
-
-```js
-{ content: string, type: "TECH_NEWS" | "SYSTEM_UPDATE", mediaUrls: string[] }
-```
-
-Posts are hard-capped at **300 characters** (enforced in `utils.js`). News posts may include a thumbnail in `mediaUrls`; update posts always use an empty array.
-
-### Environment
-
-- `config.json` is gitignored. Bot credentials and `apiBaseUrl` live there.
-- Optional `GITHUB_TOKEN` env var (in `.env`): used by `BaseUpdateWatcher` to raise the GitHub API rate limit.
-
-### Code style (Prettier)
-
-4-space indent, double quotes, semicolons, trailing commas (`"trailingComma": "all"`), 80-char print width.
+Prettier is the only enforced style tool. The repository uses 4-space indentation, double quotes, semicolons, trailing commas, and an 80-character print width.

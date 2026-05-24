@@ -45,6 +45,10 @@ export const BOT_CATEGORIES = {
 
     // MOBILE
     flutter: ["MOBILE"],
+    expo: ["FRONTEND", "MOBILE"],
+    ionic: ["FRONTEND", "MOBILE"],
+    maui: ["BACKEND", "MOBILE"],
+    capacitor: ["FRONTEND", "MOBILE"],
 
     // BACKEND
     aws: ["BACKEND"],
