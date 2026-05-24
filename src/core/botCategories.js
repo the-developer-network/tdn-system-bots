@@ -42,6 +42,22 @@ export const BOT_CATEGORIES = {
     phaser: ["GAME"],
     unity: ["GAME"],
     unrealengine: ["GAME"],
+    pygame: ["GAME"],
+    libgdx: ["GAME"],
+    monogame: ["GAME"],
+    defold: ["GAME"],
+    raylib: ["GAME"],
+    love2d: ["GAME"],
+    cocos: ["GAME"],
+    o3de: ["GAME"],
+    flaxengine: ["GAME"],
+    stride: ["GAME"],
+    steamworks: ["GAME"],
+    fmod: ["GAME"],
+    spine: ["GAME"],
+    tiled: ["GAME"],
+    box2d: ["GAME"],
+    bulletphysics: ["GAME"],
 
     // MOBILE
     flutter: ["MOBILE"],
@@ -49,6 +65,11 @@ export const BOT_CATEGORIES = {
     ionic: ["FRONTEND", "MOBILE"],
     maui: ["BACKEND", "MOBILE"],
     capacitor: ["FRONTEND", "MOBILE"],
+    androidstudio: ["MOBILE"],
+    xcode: ["MOBILE"],
+    detox: ["MOBILE"],
+    flipper: ["MOBILE"],
+    mmkv: ["MOBILE"],
 
     // BACKEND
     aws: ["BACKEND"],
@@ -123,9 +144,31 @@ export const BOT_CATEGORIES = {
     // BACKEND + MOBILE
     kotlin: ["BACKEND", "MOBILE"],
     swift: ["BACKEND", "MOBILE"],
+    kotlinmultiplatform: ["BACKEND", "MOBILE"],
+    fastlane: ["BACKEND", "MOBILE"],
+    firebase: ["BACKEND", "MOBILE"],
+    appwrite: ["BACKEND", "MOBILE"],
+    realm: ["BACKEND", "MOBILE"],
+    watermelondb: ["BACKEND", "MOBILE"],
 
     // FRONTEND + MOBILE
     reactnative: ["FRONTEND", "MOBILE"],
+    jetpackcompose: ["FRONTEND", "MOBILE"],
+    swiftui: ["FRONTEND", "MOBILE"],
+    nativescript: ["FRONTEND", "MOBILE"],
+    reanimated: ["FRONTEND", "MOBILE"],
+    rnskia: ["FRONTEND", "MOBILE"],
+    tamagui: ["FRONTEND", "MOBILE"],
+    shopifyrn: ["FRONTEND", "MOBILE"],
+    quasar: ["FRONTEND", "MOBILE"],
+    framework7: ["FRONTEND", "MOBILE"],
+    nativewind: ["FRONTEND", "MOBILE"],
+
+    // FRONTEND + GAME
+    babylonjs: ["FRONTEND", "GAME"],
+    pixijs: ["FRONTEND", "GAME"],
+    playcanvas: ["FRONTEND", "GAME"],
+    excalibur: ["FRONTEND", "GAME"],
 
     // AI + BACKEND
     n8n: ["AI", "BACKEND"],

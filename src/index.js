@@ -341,6 +341,129 @@ import { startFlowiseUpdatesBot } from "./bots/flowise/update.js";
 import { startXAIUpdatesBot } from "./bots/xai/update.js";
 import { startCursorNewsBot } from "./bots/cursor/news.js";
 
+/* ── Jetpack Compose (news only — no public GitHub releases) ─ */
+import { startJetpackComposeNewsBot } from "./bots/jetpackcompose/news.js";
+
+/* ── SwiftUI (news only — no public GitHub releases) ────────── */
+import { startSwiftUINewsBot } from "./bots/swiftui/news.js";
+
+/* ── Kotlin Multiplatform ───────────────────────────────────── */
+import { startKotlinMultiplatformNewsBot } from "./bots/kotlinmultiplatform/news.js";
+import { startKotlinMultiplatformUpdatesBot } from "./bots/kotlinmultiplatform/update.js";
+
+/* ── NativeScript ───────────────────────────────────────────── */
+import { startNativeScriptNewsBot } from "./bots/nativescript/news.js";
+import { startNativeScriptUpdatesBot } from "./bots/nativescript/update.js";
+
+/* ── Android Studio (news only — no public GitHub releases) ─── */
+import { startAndroidStudioNewsBot } from "./bots/androidstudio/news.js";
+
+/* ── Xcode (news only — no public GitHub releases) ──────────── */
+import { startXcodeNewsBot } from "./bots/xcode/news.js";
+
+/* ── fastlane (update only) ─────────────────────────────────── */
+import { startFastlaneUpdatesBot } from "./bots/fastlane/update.js";
+
+/* ── Firebase ───────────────────────────────────────────────── */
+import { startFirebaseNewsBot } from "./bots/firebase/news.js";
+import { startFirebaseUpdatesBot } from "./bots/firebase/update.js";
+
+/* ── Appwrite ───────────────────────────────────────────────── */
+import { startAppwriteNewsBot } from "./bots/appwrite/news.js";
+import { startAppwriteUpdatesBot } from "./bots/appwrite/update.js";
+
+/* ── Realm (update only) ────────────────────────────────────── */
+import { startRealmUpdatesBot } from "./bots/realm/update.js";
+
+/* ── Detox (update only) ────────────────────────────────────── */
+import { startDetoxUpdatesBot } from "./bots/detox/update.js";
+
+/* ── Flipper (update only) ──────────────────────────────────── */
+import { startFlipperUpdatesBot } from "./bots/flipper/update.js";
+
+/* ── React Native Reanimated (update only) ──────────────────── */
+import { startReanimatedUpdatesBot } from "./bots/reanimated/update.js";
+
+/* ── React Native Skia (update only) ───────────────────────── */
+import { startRNSkiaUpdatesBot } from "./bots/rnskia/update.js";
+
+/* ── Tamagui (update only) ──────────────────────────────────── */
+import { startTamaguiUpdatesBot } from "./bots/tamagui/update.js";
+
+/* ── MMKV (update only) ─────────────────────────────────────── */
+import { startMMKVUpdatesBot } from "./bots/mmkv/update.js";
+
+/* ── WatermelonDB (update only) ─────────────────────────────── */
+import { startWatermelonDBUpdatesBot } from "./bots/watermelondb/update.js";
+
+/* ── Shopify React Native (update only) ─────────────────────── */
+import { startShopifyRNUpdatesBot } from "./bots/shopifyrn/update.js";
+
+/* ── Quasar Framework (update only) ─────────────────────────── */
+import { startQuasarUpdatesBot } from "./bots/quasar/update.js";
+
+/* ── Framework7 (update only) ───────────────────────────────── */
+import { startFramework7UpdatesBot } from "./bots/framework7/update.js";
+
+/* ── NativeWind (update only) ───────────────────────────────── */
+import { startNativeWindUpdatesBot } from "./bots/nativewind/update.js";
+
+/* ── pygame (update only) ───────────────────────────────────── */
+import { startPygameUpdatesBot } from "./bots/pygame/update.js";
+
+/* ── libGDX (update only) ───────────────────────────────────── */
+import { startLibGDXUpdatesBot } from "./bots/libgdx/update.js";
+
+/* ── MonoGame (update only) ─────────────────────────────────── */
+import { startMonoGameUpdatesBot } from "./bots/monogame/update.js";
+
+/* ── Defold ─────────────────────────────────────────────────── */
+import { startDefoldNewsBot } from "./bots/defold/news.js";
+import { startDefoldUpdatesBot } from "./bots/defold/update.js";
+
+/* ── raylib (update only) ───────────────────────────────────── */
+import { startRaylibUpdatesBot } from "./bots/raylib/update.js";
+
+/* ── LÖVE / love2d (update only) ───────────────────────────── */
+import { startLove2DUpdatesBot } from "./bots/love2d/update.js";
+
+/* ── Cocos Creator (update only) ────────────────────────────── */
+import { startCocosUpdatesBot } from "./bots/cocos/update.js";
+
+/* ── Open 3D Engine (update only) ───────────────────────────── */
+import { startO3DEUpdatesBot } from "./bots/o3de/update.js";
+
+/* ── Flax Engine (update only) ──────────────────────────────── */
+import { startFlaxEngineUpdatesBot } from "./bots/flaxengine/update.js";
+
+/* ── Stride Engine (update only) ────────────────────────────── */
+import { startStrideUpdatesBot } from "./bots/stride/update.js";
+
+/* ── Babylon.js (update only) ───────────────────────────────── */
+import { startBabylonJSUpdatesBot } from "./bots/babylonjs/update.js";
+
+/* ── PixiJS (update only) ───────────────────────────────────── */
+import { startPixiJSUpdatesBot } from "./bots/pixijs/update.js";
+
+/* ── PlayCanvas ─────────────────────────────────────────────── */
+import { startPlayCanvasNewsBot } from "./bots/playcanvas/news.js";
+import { startPlayCanvasUpdatesBot } from "./bots/playcanvas/update.js";
+
+/* ── Excalibur.js (update only) ─────────────────────────────── */
+import { startExcaliburUpdatesBot } from "./bots/excalibur/update.js";
+
+/* ── Spine 2D (update only) ─────────────────────────────────── */
+import { startSpineUpdatesBot } from "./bots/spine/update.js";
+
+/* ── Tiled Map Editor (update only) ─────────────────────────── */
+import { startTiledUpdatesBot } from "./bots/tiled/update.js";
+
+/* ── Box2D (update only) ────────────────────────────────────── */
+import { startBox2DUpdatesBot } from "./bots/box2d/update.js";
+
+/* ── Bullet Physics (update only) ───────────────────────────── */
+import { startBulletPhysicsUpdatesBot } from "./bots/bulletphysics/update.js";
+
 /**
  * Bot registry. Each entry contains a display name and its start function.
  * @type {{ name: string, start: Function }[]}
@@ -512,6 +635,71 @@ const bots = [
     { name: "Flowise Updates", start: startFlowiseUpdatesBot },
     { name: "xAI Updates", start: startXAIUpdatesBot },
     { name: "Cursor News", start: startCursorNewsBot },
+
+    /* ── Mobile: Native / Platform ──────────────────────────── */
+    { name: "Jetpack Compose News", start: startJetpackComposeNewsBot },
+    { name: "SwiftUI News", start: startSwiftUINewsBot },
+    {
+        name: "Kotlin Multiplatform News",
+        start: startKotlinMultiplatformNewsBot,
+    },
+    {
+        name: "Kotlin Multiplatform Updates",
+        start: startKotlinMultiplatformUpdatesBot,
+    },
+    { name: "NativeScript News", start: startNativeScriptNewsBot },
+    { name: "NativeScript Updates", start: startNativeScriptUpdatesBot },
+    { name: "Android Studio News", start: startAndroidStudioNewsBot },
+    { name: "Xcode News", start: startXcodeNewsBot },
+
+    /* ── Mobile: Tooling ─────────────────────────────────────── */
+    { name: "fastlane Updates", start: startFastlaneUpdatesBot },
+    { name: "Firebase News", start: startFirebaseNewsBot },
+    { name: "Firebase Updates", start: startFirebaseUpdatesBot },
+    { name: "Appwrite News", start: startAppwriteNewsBot },
+    { name: "Appwrite Updates", start: startAppwriteUpdatesBot },
+    { name: "Realm Updates", start: startRealmUpdatesBot },
+    { name: "Detox Updates", start: startDetoxUpdatesBot },
+    { name: "Flipper Updates", start: startFlipperUpdatesBot },
+
+    /* ── Mobile: React Native Ecosystem ─────────────────────── */
+    { name: "Reanimated Updates", start: startReanimatedUpdatesBot },
+    { name: "RN Skia Updates", start: startRNSkiaUpdatesBot },
+    { name: "Tamagui Updates", start: startTamaguiUpdatesBot },
+    { name: "MMKV Updates", start: startMMKVUpdatesBot },
+    { name: "WatermelonDB Updates", start: startWatermelonDBUpdatesBot },
+    { name: "Shopify RN Updates", start: startShopifyRNUpdatesBot },
+
+    /* ── Mobile: Cross-platform UI ───────────────────────────── */
+    { name: "Quasar Updates", start: startQuasarUpdatesBot },
+    { name: "Framework7 Updates", start: startFramework7UpdatesBot },
+    { name: "NativeWind Updates", start: startNativeWindUpdatesBot },
+
+    /* ── Game: Engines / Frameworks ──────────────────────────── */
+    { name: "pygame Updates", start: startPygameUpdatesBot },
+    { name: "libGDX Updates", start: startLibGDXUpdatesBot },
+    { name: "MonoGame Updates", start: startMonoGameUpdatesBot },
+    { name: "Defold News", start: startDefoldNewsBot },
+    { name: "Defold Updates", start: startDefoldUpdatesBot },
+    { name: "raylib Updates", start: startRaylibUpdatesBot },
+    { name: "LÖVE Updates", start: startLove2DUpdatesBot },
+    { name: "Cocos Creator Updates", start: startCocosUpdatesBot },
+    { name: "O3DE Updates", start: startO3DEUpdatesBot },
+    { name: "Flax Engine Updates", start: startFlaxEngineUpdatesBot },
+    { name: "Stride Engine Updates", start: startStrideUpdatesBot },
+
+    /* ── Game: Web Game ──────────────────────────────────────── */
+    { name: "Babylon.js Updates", start: startBabylonJSUpdatesBot },
+    { name: "PixiJS Updates", start: startPixiJSUpdatesBot },
+    { name: "PlayCanvas News", start: startPlayCanvasNewsBot },
+    { name: "PlayCanvas Updates", start: startPlayCanvasUpdatesBot },
+    { name: "Excalibur.js Updates", start: startExcaliburUpdatesBot },
+
+    /* ── Game: Tooling ───────────────────────────────────────── */
+    { name: "Spine 2D Updates", start: startSpineUpdatesBot },
+    { name: "Tiled Updates", start: startTiledUpdatesBot },
+    { name: "Box2D Updates", start: startBox2DUpdatesBot },
+    { name: "Bullet Physics Updates", start: startBulletPhysicsUpdatesBot },
 ];
 
 /**
@@ -563,7 +751,7 @@ async function bootstrap() {
     log(
         "SYSTEM",
         "INFO",
-        "Monitoring news feeds and GitHub releases across 75 technologies...",
+        "Monitoring news feeds and GitHub releases across 116 technologies...",
     );
 }
 

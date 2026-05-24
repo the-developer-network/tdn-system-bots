@@ -1351,6 +1351,481 @@ const BOTS = [
         avatarUrl: "https://www.cursor.com/favicon.ico",
         bannerUrl: null,
     },
+
+    // ─── Mobile: Native / Platform ──────────────────────────────
+    {
+        key: "jetpackcompose",
+        fullName: "Jetpack Compose",
+        description:
+            "Jetpack Compose is Android's modern toolkit for building native UI with a declarative Kotlin API.",
+        website: "https://developer.android.com/jetpack/compose",
+        location: "developer.android.com",
+        githubUrl: "https://github.com/androidx/androidx",
+        avatarUrl: "https://github.com/google.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/androidx/androidx",
+    },
+    {
+        key: "swiftui",
+        fullName: "SwiftUI",
+        description:
+            "SwiftUI is Apple's declarative UI framework for building apps across all Apple platforms with Swift.",
+        website: "https://developer.apple.com/xcode/swiftui/",
+        location: "developer.apple.com",
+        githubUrl: "https://github.com/apple/swift",
+        avatarUrl: "https://github.com/apple.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/apple/swift",
+    },
+    {
+        key: "kotlinmultiplatform",
+        fullName: "Kotlin Multiplatform",
+        description:
+            "Kotlin Multiplatform allows sharing code across iOS, Android, desktop, and web from a single Kotlin codebase.",
+        website: "https://www.jetbrains.com/kotlin-multiplatform/",
+        location: "jetbrains.com",
+        githubUrl: "https://github.com/JetBrains/compose-multiplatform",
+        avatarUrl: "https://github.com/JetBrains.png",
+        bannerUrl:
+            "https://opengraph.githubassets.com/1/JetBrains/compose-multiplatform",
+    },
+    {
+        key: "nativescript",
+        fullName: "NativeScript",
+        description:
+            "NativeScript is an open-source framework for building truly native mobile apps using JavaScript, TypeScript, or Angular.",
+        website: "https://nativescript.org",
+        location: "nativescript.org",
+        githubUrl: "https://github.com/NativeScript/NativeScript",
+        avatarUrl: "https://github.com/NativeScript.png",
+        bannerUrl:
+            "https://opengraph.githubassets.com/1/NativeScript/NativeScript",
+    },
+    {
+        key: "androidstudio",
+        fullName: "Android Studio",
+        description:
+            "Android Studio is Google's official IDE for Android app development, built on IntelliJ IDEA.",
+        website: "https://developer.android.com/studio",
+        location: "developer.android.com",
+        githubUrl: "https://github.com/google",
+        avatarUrl: "https://github.com/google.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/google/android-studio",
+    },
+    {
+        key: "xcode",
+        fullName: "Xcode",
+        description:
+            "Xcode is Apple's integrated development environment for building apps for Mac, iPhone, iPad, Apple Watch, and Apple TV.",
+        website: "https://developer.apple.com/xcode/",
+        location: "developer.apple.com",
+        githubUrl: "https://github.com/apple",
+        avatarUrl: "https://github.com/apple.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/apple/swift",
+    },
+
+    // ─── Mobile: Tooling ────────────────────────────────────────
+    {
+        key: "fastlane",
+        fullName: "fastlane",
+        description:
+            "fastlane is an open-source automation tool for iOS and Android developers to automate deployments and releases.",
+        website: "https://fastlane.tools",
+        location: "fastlane.tools",
+        githubUrl: "https://github.com/fastlane/fastlane",
+        avatarUrl: "https://github.com/fastlane.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/fastlane/fastlane",
+    },
+    {
+        key: "firebase",
+        fullName: "Firebase",
+        description:
+            "Firebase is Google's platform for building mobile and web applications with real-time databases, auth, and cloud functions.",
+        website: "https://firebase.google.com",
+        location: "firebase.google.com",
+        githubUrl: "https://github.com/firebase/firebase-js-sdk",
+        avatarUrl: "https://github.com/firebase.png",
+        bannerUrl:
+            "https://opengraph.githubassets.com/1/firebase/firebase-js-sdk",
+    },
+    {
+        key: "appwrite",
+        fullName: "Appwrite",
+        description:
+            "Appwrite is an open-source backend platform providing auth, databases, storage, and cloud functions for any app.",
+        website: "https://appwrite.io",
+        location: "appwrite.io",
+        githubUrl: "https://github.com/appwrite/appwrite",
+        avatarUrl: "https://github.com/appwrite.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/appwrite/appwrite",
+    },
+    {
+        key: "realm",
+        fullName: "Realm",
+        description:
+            "Realm is a fast, local-first mobile database and sync platform for building offline-capable apps.",
+        website: "https://realm.io",
+        location: "realm.io",
+        githubUrl: "https://github.com/realm/realm-js",
+        avatarUrl: "https://github.com/realm.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/realm/realm-js",
+    },
+    {
+        key: "detox",
+        fullName: "Detox",
+        description:
+            "Detox is a gray-box end-to-end testing and automation framework for mobile apps built by Wix.",
+        website: "https://wix.github.io/Detox/",
+        location: "wix.github.io/Detox",
+        githubUrl: "https://github.com/wix/Detox",
+        avatarUrl: "https://github.com/wix.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/wix/Detox",
+    },
+    {
+        key: "flipper",
+        fullName: "Flipper",
+        description:
+            "Flipper is Meta's extensible mobile app debugger for React Native, iOS, and Android.",
+        website: "https://fbflipper.com",
+        location: "fbflipper.com",
+        githubUrl: "https://github.com/facebook/flipper",
+        avatarUrl: "https://github.com/facebook.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/facebook/flipper",
+    },
+
+    // ─── Mobile: React Native Ecosystem ─────────────────────────
+    {
+        key: "reanimated",
+        fullName: "React Native Reanimated",
+        description:
+            "React Native Reanimated is a powerful animation library for React Native with buttery-smooth 60fps animations.",
+        website: "https://docs.swmansion.com/react-native-reanimated/",
+        location: "swmansion.com",
+        githubUrl:
+            "https://github.com/software-mansion/react-native-reanimated",
+        avatarUrl: "https://github.com/software-mansion.png",
+        bannerUrl:
+            "https://opengraph.githubassets.com/1/software-mansion/react-native-reanimated",
+    },
+    {
+        key: "rnskia",
+        fullName: "React Native Skia",
+        description:
+            "React Native Skia brings the Skia Graphics Library to React Native, enabling high-performance 2D graphics.",
+        website: "https://shopify.github.io/react-native-skia/",
+        location: "shopify.github.io",
+        githubUrl: "https://github.com/Shopify/react-native-skia",
+        avatarUrl: "https://github.com/Shopify.png",
+        bannerUrl:
+            "https://opengraph.githubassets.com/1/Shopify/react-native-skia",
+    },
+    {
+        key: "tamagui",
+        fullName: "Tamagui",
+        description:
+            "Tamagui is a universal UI kit for React Native and web with themes, animations, and an optimizing compiler.",
+        website: "https://tamagui.dev",
+        location: "tamagui.dev",
+        githubUrl: "https://github.com/tamagui/tamagui",
+        avatarUrl: "https://github.com/tamagui.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/tamagui/tamagui",
+    },
+    {
+        key: "mmkv",
+        fullName: "MMKV",
+        description:
+            "MMKV is an efficient, small key-value storage framework developed by Tencent, widely used in React Native apps.",
+        website: "https://github.com/Tencent/MMKV",
+        location: "github.com/Tencent/MMKV",
+        githubUrl: "https://github.com/Tencent/MMKV",
+        avatarUrl: "https://github.com/Tencent.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/Tencent/MMKV",
+    },
+    {
+        key: "watermelondb",
+        fullName: "WatermelonDB",
+        description:
+            "WatermelonDB is a high-performance reactive database for React Native and React apps built on SQLite.",
+        website: "https://watermelondb.dev",
+        location: "watermelondb.dev",
+        githubUrl: "https://github.com/Nozbe/WatermelonDB",
+        avatarUrl: "https://github.com/Nozbe.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/Nozbe/WatermelonDB",
+    },
+    {
+        key: "shopifyrn",
+        fullName: "Shopify React Native",
+        description:
+            "Shopify's React Native open-source ecosystem including FlashList — a performant drop-in replacement for FlatList.",
+        website: "https://shopify.github.io/flash-list/",
+        location: "shopify.github.io",
+        githubUrl: "https://github.com/Shopify/flash-list",
+        avatarUrl: "https://github.com/Shopify.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/Shopify/flash-list",
+    },
+
+    // ─── Mobile: Cross-platform UI ──────────────────────────────
+    {
+        key: "quasar",
+        fullName: "Quasar Framework",
+        description:
+            "Quasar is a high-performance Vue.js framework for building SPA, SSR, PWA, mobile, and desktop apps from a single codebase.",
+        website: "https://quasar.dev",
+        location: "quasar.dev",
+        githubUrl: "https://github.com/quasarframework/quasar",
+        avatarUrl: "https://github.com/quasarframework.png",
+        bannerUrl:
+            "https://opengraph.githubassets.com/1/quasarframework/quasar",
+    },
+    {
+        key: "framework7",
+        fullName: "Framework7",
+        description:
+            "Framework7 is a free and open-source mobile HTML framework for building iOS and Android-like apps with web technologies.",
+        website: "https://framework7.io",
+        location: "framework7.io",
+        githubUrl: "https://github.com/framework7io/framework7",
+        avatarUrl: "https://github.com/framework7io.png",
+        bannerUrl:
+            "https://opengraph.githubassets.com/1/framework7io/framework7",
+    },
+    {
+        key: "nativewind",
+        fullName: "NativeWind",
+        description:
+            "NativeWind uses Tailwind CSS as a scripting language for creating a universal style system in React Native.",
+        website: "https://www.nativewind.dev",
+        location: "nativewind.dev",
+        githubUrl: "https://github.com/marklawlor/nativewind",
+        avatarUrl: "https://github.com/marklawlor.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/marklawlor/nativewind",
+    },
+
+    // ─── Game: Engines / Frameworks ─────────────────────────────
+    {
+        key: "pygame",
+        fullName: "pygame",
+        description:
+            "pygame is a set of Python modules designed for writing video games, providing graphics, sound, and input handling.",
+        website: "https://www.pygame.org",
+        location: "pygame.org",
+        githubUrl: "https://github.com/pygame/pygame",
+        avatarUrl: "https://github.com/pygame.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/pygame/pygame",
+    },
+    {
+        key: "libgdx",
+        fullName: "libGDX",
+        description:
+            "libGDX is a free, open-source game development framework written in Java for desktop, Android, iOS, and web.",
+        website: "https://libgdx.com",
+        location: "libgdx.com",
+        githubUrl: "https://github.com/libgdx/libgdx",
+        avatarUrl: "https://github.com/libgdx.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/libgdx/libgdx",
+    },
+    {
+        key: "monogame",
+        fullName: "MonoGame",
+        description:
+            "MonoGame is a free, open-source implementation of the Microsoft XNA Framework for cross-platform game development.",
+        website: "https://monogame.net",
+        location: "monogame.net",
+        githubUrl: "https://github.com/MonoGame/MonoGame",
+        avatarUrl: "https://github.com/MonoGame.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/MonoGame/MonoGame",
+    },
+    {
+        key: "defold",
+        fullName: "Defold",
+        description:
+            "Defold is a free-to-use, source-available game engine used for developing 2D and 3D cross-platform games.",
+        website: "https://defold.com",
+        location: "defold.com",
+        githubUrl: "https://github.com/defold/defold",
+        avatarUrl: "https://github.com/defold.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/defold/defold",
+    },
+    {
+        key: "raylib",
+        fullName: "raylib",
+        description:
+            "raylib is a simple and easy-to-use library to enjoy videogames programming — no fancy interface, just pure coding.",
+        website: "https://www.raylib.com",
+        location: "raylib.com",
+        githubUrl: "https://github.com/raysan5/raylib",
+        avatarUrl: "https://github.com/raysan5.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/raysan5/raylib",
+    },
+    {
+        key: "love2d",
+        fullName: "LÖVE",
+        description:
+            "LÖVE (love2d) is a free, open-source framework for making 2D games in Lua, designed for simplicity and fun.",
+        website: "https://love2d.org",
+        location: "love2d.org",
+        githubUrl: "https://github.com/love2d/love",
+        avatarUrl: "https://github.com/love2d.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/love2d/love",
+    },
+    {
+        key: "cocos",
+        fullName: "Cocos Creator",
+        description:
+            "Cocos Creator is a complete game development toolset including editor and engine for 2D and 3D cross-platform games.",
+        website: "https://www.cocos.com",
+        location: "cocos.com",
+        githubUrl: "https://github.com/cocos-creator/cocos-engine",
+        avatarUrl: "https://github.com/cocos-creator.png",
+        bannerUrl:
+            "https://opengraph.githubassets.com/1/cocos-creator/cocos-engine",
+    },
+    {
+        key: "o3de",
+        fullName: "Open 3D Engine",
+        description:
+            "Open 3D Engine (O3DE) is an open-source, AAA-capable game engine by the Linux Foundation for 3D and VR development.",
+        website: "https://o3de.org",
+        location: "o3de.org",
+        githubUrl: "https://github.com/o3de/o3de",
+        avatarUrl: "https://github.com/o3de.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/o3de/o3de",
+    },
+    {
+        key: "flaxengine",
+        fullName: "Flax Engine",
+        description:
+            "Flax Engine is a high-quality modern 3D game engine written in C++ with C# scripting for cross-platform games.",
+        website: "https://flaxengine.com",
+        location: "flaxengine.com",
+        githubUrl: "https://github.com/FlaxEngine/FlaxEngine",
+        avatarUrl: "https://github.com/FlaxEngine.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/FlaxEngine/FlaxEngine",
+    },
+    {
+        key: "stride",
+        fullName: "Stride Engine",
+        description:
+            "Stride is a free, open-source 2D/3D cross-platform game engine written in C# with a full editor.",
+        website: "https://www.stride3d.net",
+        location: "stride3d.net",
+        githubUrl: "https://github.com/stride3d/stride",
+        avatarUrl: "https://github.com/stride3d.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/stride3d/stride",
+    },
+
+    // ─── Game: Web Game ──────────────────────────────────────────
+    {
+        key: "babylonjs",
+        fullName: "Babylon.js",
+        description:
+            "Babylon.js is a powerful, beautiful, simple, and open game and rendering engine packed into a friendly JavaScript framework.",
+        website: "https://www.babylonjs.com",
+        location: "babylonjs.com",
+        githubUrl: "https://github.com/BabylonJS/Babylon.js",
+        avatarUrl: "https://github.com/BabylonJS.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/BabylonJS/Babylon.js",
+    },
+    {
+        key: "pixijs",
+        fullName: "PixiJS",
+        description:
+            "PixiJS is the fastest, most lightweight 2D library available for the web, using WebGL with a canvas fallback.",
+        website: "https://pixijs.com",
+        location: "pixijs.com",
+        githubUrl: "https://github.com/pixijs/pixijs",
+        avatarUrl: "https://github.com/pixijs.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/pixijs/pixijs",
+    },
+    {
+        key: "playcanvas",
+        fullName: "PlayCanvas",
+        description:
+            "PlayCanvas is an open-source game engine and visual development platform for building interactive 3D web experiences.",
+        website: "https://playcanvas.com",
+        location: "playcanvas.com",
+        githubUrl: "https://github.com/playcanvas/engine",
+        avatarUrl: "https://github.com/playcanvas.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/playcanvas/engine",
+    },
+    {
+        key: "excalibur",
+        fullName: "Excalibur.js",
+        description:
+            "Excalibur.js is a free game engine written in TypeScript for making 2D games in the browser.",
+        website: "https://excaliburjs.com",
+        location: "excaliburjs.com",
+        githubUrl: "https://github.com/excaliburjs/Excalibur",
+        avatarUrl: "https://github.com/excaliburjs.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/excaliburjs/Excalibur",
+    },
+
+    // ─── Game: Tooling ───────────────────────────────────────────
+    {
+        key: "steamworks",
+        fullName: "Steamworks SDK",
+        description:
+            "Steamworks SDK is Valve's suite of tools and APIs for integrating games with Steam's platform, social, and distribution features.",
+        website: "https://partner.steamgames.com",
+        location: "partner.steamgames.com",
+        githubUrl: null,
+        avatarUrl: "https://github.com/ValveSoftware.png",
+        bannerUrl: null,
+    },
+    {
+        key: "fmod",
+        fullName: "FMOD Studio",
+        description:
+            "FMOD Studio is an industry-standard audio engine and middleware for interactive games and real-time applications.",
+        website: "https://www.fmod.com",
+        location: "fmod.com",
+        githubUrl: null,
+        avatarUrl: "https://github.com/fmod.png",
+        bannerUrl: null,
+    },
+    {
+        key: "spine",
+        fullName: "Spine 2D",
+        description:
+            "Spine is professional 2D skeletal animation software for games, with runtime libraries for all major engines.",
+        website: "https://esotericsoftware.com",
+        location: "esotericsoftware.com",
+        githubUrl: "https://github.com/EsotericSoftware/spine-runtimes",
+        avatarUrl: "https://github.com/EsotericSoftware.png",
+        bannerUrl:
+            "https://opengraph.githubassets.com/1/EsotericSoftware/spine-runtimes",
+    },
+    {
+        key: "tiled",
+        fullName: "Tiled Map Editor",
+        description:
+            "Tiled is a free, flexible, and extensible tile map editor used to create game levels and maps.",
+        website: "https://www.mapeditor.org",
+        location: "mapeditor.org",
+        githubUrl: "https://github.com/mapeditor/tiled",
+        avatarUrl: "https://github.com/mapeditor.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/mapeditor/tiled",
+    },
+    {
+        key: "box2d",
+        fullName: "Box2D",
+        description:
+            "Box2D is a free open-source 2D rigid body simulation library for games — the de facto standard for 2D physics.",
+        website: "https://box2d.org",
+        location: "box2d.org",
+        githubUrl: "https://github.com/erincatto/box2d",
+        avatarUrl: "https://github.com/erincatto.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/erincatto/box2d",
+    },
+    {
+        key: "bulletphysics",
+        fullName: "Bullet Physics",
+        description:
+            "Bullet Physics is a professional open-source collision detection and rigid body dynamics library used in games and films.",
+        website: "https://bulletphysics.org",
+        location: "bulletphysics.org",
+        githubUrl: "https://github.com/bulletphysics/bullet3",
+        avatarUrl: "https://github.com/bulletphysics.png",
+        bannerUrl: "https://opengraph.githubassets.com/1/bulletphysics/bullet3",
+    },
 ];
 
 /* ═══════════════════════════════════════════════════════════
@@ -1473,7 +1948,7 @@ async function main() {
             errors.push(`${bot.key}: ${e.message}`);
         }
 
-        await wait(DELAY_MS);
+        //await wait(DELAY_MS);
     }
 
     // ── Summary ─────────────────────────────────────────────
